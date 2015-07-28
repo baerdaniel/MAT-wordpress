@@ -1,0 +1,121 @@
+
+/* Font loader ------------------*/
+
+@font-face {
+    font-family: 'CalibreWeb-Regular';
+    src: url('../fonts/CalibreWeb-Regular.eot');
+    src: url('../fonts/CalibreWeb-Regular.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/CalibreWeb-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CalibreWeb-Bold';
+    src: url('../fonts/CalibreWeb-Bold.eot');
+    src: url('../fonts/CalibreWeb-Bold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/CalibreWeb-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+@font-face {
+    font-family: 'CalibreWeb-Black';
+    src: url('../fonts/CalibreWeb-Black.eot');
+    src: url('../fonts/CalibreWeb-Black.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/CalibreWeb-Black.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+/* Img url ------------------*/
+
+/*.img {
+	background: url('../img/apples.jpg') center center no-repeat;
+	width: 100%;
+}*/
+
+
+
+
+
+
+/* Links  ------------------*/
+
+a {
+    color: grey;
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
+}
+
+/* Typography ------------------*/
+
+
+body {
+    font-family: 'CalibreWeb-Regular';
+    font-size: 16px;
+}
+
+
+
+/* Posts  ------------------*/
+
+article {
+    margin-bottom: 2em;
+    position: relative;
+}
+
+.poster {
+    width: 100%;
+    height: 0;
+    padding-bottom: 33%;
+    overflow: hidden;
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: fixed !important;
+}
+
+.entry-header {
+    font-family: 'CalibreWeb-Black';
+    font-size: 2em;
+    position: absolute;
+    top: 0;
+}
+
+
+
+/* Footer ------------------*/
+
+.page-footer .copyright {
+    text-align: right;
+}
+
+
+
+
+
+
+
+/* Media Queries ------------------*/
+
+
+/* Large (as per framework.css) */
+
+@media screen and (min-width: 800px) {
+}
+
+/* Medium (as per framework.css) */
+
+@media screen and (min-width: 600px) {
+}
+
+
