@@ -10,9 +10,12 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" class='post trunk'>
-<!-- <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>> -->
+<?php 
+	$colour = get_field('colour');
+?>
 
+<article id="post-<?php the_ID(); ?>" class='post' style='background-color: <?php echo $colour; ?>'>
+<!-- <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>> -->
 	
 
 	<!-- get post thumbnail url -->
@@ -20,7 +23,7 @@
 	<?php
 		$src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), '' );
 	?>
-	<div class='poster' style="background: url(<?php echo $src[0]; ?> )">
+	<div class='poster trunk' style="background: url(<?php echo $src[0]; ?> )">
 	</div>
 
 	<header class="entry-header">
@@ -35,73 +38,24 @@
 		<?php the_category() ?>
 	</header><!-- .entry-header -->
 
-	<div class="entry-content">
+	<div class="entry-content trunk">
+
+
 		<?php the_content() ?>
-
-<!-- 		<?php 
-
-				// check for rows (parent)
-				if( have_rows('participants') ): ?>
-					<div class="participants">
-					<?php 
-
-					// loop through rows (parent)
-					while( have_rows('participants') ): the_row(); ?>
-
-						
-						<div>
-
-
-							<h3><?php the_sub_field('name'); ?></h3>
-							<h3><?php the_sub_field('bio'); ?></h3>
-							<?php the_sub_field('image'); ?>
-							
-							
-						</div>	
-
-					<?php endwhile; ?>
-					</div>
-				<?php endif; ?>
- -->
-
-
-		<?php
-
-			    // various
-			    while ( have_rows('participants') ) : the_row();
-
-					$image = get_sub_field('image');
-					$title = get_sub_field('title');
-					$bio = get_sub_field('bio');
-
-			        if( get_row_layout() == 'participant' ):
-
-			        	echo '<div class="participant">';
-			        		echo '<div class="portrait"><img src="' . $image['sizes']['large'] . '"></div>';
-			        		echo '<h3 class="">' . $name . '</h3>';
-			        		echo '<p>' . $bio . '</p>';
-			        	echo '</div>';
-
-			        endif;
-
-			    endwhile;
-
-		?>
-
 
      	<?php 
 
 		$images = get_field('gallery');
 
 		if( $images ): ?>
-		    <ul class='main-gallery'>
+		    <div class='main-gallery'>
 		        <?php foreach( $images as $image ): ?>
-		            <li>
+		            <div class='gallery-cell'>
 		                <img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" />
-		                <?php echo $image['caption']; ?>
-		            </li>
+		                <!-- <figcaption><?php echo $image['caption']; ?></figcaption> -->
+		            </div>
 		        <?php endforeach; ?>
-		    </ul>
+		    </div>
 		<?php endif; ?>
 
 		<?php
@@ -126,7 +80,6 @@
 			    endwhile;
 
 		?>
-
 
 
 		<?php
@@ -161,6 +114,33 @@
 			    endwhile;
 
 		?>
+
+
+		<?php
+
+			    // various
+			    while ( have_rows('participants') ) : the_row();
+
+					$image = get_sub_field('image');
+					$title = get_sub_field('title');
+					$bio = get_sub_field('bio');
+
+			        if( get_row_layout() == 'participant' ):
+
+			        	echo '<div class="participant float-container">';
+			        		echo '<div class="portrait L-1-4"><img src="' . $image['sizes']['large'] . '"></div>';
+			        		echo '<div class="L-3-4">';
+			        			echo '<h3 class="">' . $name . '</h3>';
+			        			echo '<p>' . $bio . '</p>';
+			        		echo '</div>';
+			        	echo '</div>';
+
+			        endif;
+
+			    endwhile;
+
+		?>		
+
 	</div><!-- .entry-content -->
 
 

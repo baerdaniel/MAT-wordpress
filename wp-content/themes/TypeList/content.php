@@ -10,17 +10,16 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" class='post trunk'>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'post L-1-1' ); ?>>
 <!-- <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>> -->
-
-	
 
 	<!-- get post thumbnail url -->
 	<?php global $post; ?>
 	<?php
 		$src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), '' );
+		$colour = get_field('colour');
 	?>
-	<div class='poster' style="background: url(<?php echo $src[0]; ?> )">
+	<div class='poster' style="background-image: url(<?php echo $src[0]; ?> ); background-color: <?php echo $colour; ?>">
 	</div>
 
 	<header class="entry-header">

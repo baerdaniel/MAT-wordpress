@@ -13,13 +13,13 @@ $(window).load(function(){
 	
 	$('.main-gallery').flickity({
 	  // options
-	  // cellAlign: 'left',
+	  cellAlign: 'left',
 	  contain: true,
 	  selectedAttraction: 0.02,
 	  pageDots: true,
 	  imagesLoaded: true,
 	  accessibility: false,
 	  // freeScroll: true,
-	  cellSelector: '.main-gallery img'
+	  cellSelector: '.main-gallery .gallery-cell'
 	});
 });
