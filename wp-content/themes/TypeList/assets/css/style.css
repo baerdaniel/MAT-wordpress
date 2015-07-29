@@ -67,7 +67,7 @@ body {
 
 
 
-/* Posts  ------------------*/
+/* Items  ------------------*/
 
 article {
     margin-bottom: 2em;
@@ -90,6 +90,33 @@ article {
     position: absolute;
     top: 0;
 }
+
+
+
+/* Single Pages  ------------------*/
+
+.main-gallery{
+    /*height: 100px;*/
+}
+
+
+
+
+/* Media ------------------*/
+
+.video {
+    padding-bottom: 70%;
+    position: relative;
+}
+
+.video iframe {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+
+
 
 
 
