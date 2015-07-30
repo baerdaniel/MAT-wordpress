@@ -20,6 +20,33 @@
 
 	<div class="entry-content">
 		<?php the_content(); ?>
+
+		<?php the_field('address') ?>
+				<?php
+
+			    // Visit page opening
+			    while ( have_rows('opening_times') ) : the_row();
+
+					$day = get_sub_field('day');
+					$opening = get_sub_field('opening');
+					$closing = get_sub_field('closing');
+
+			        if( get_row_layout() == 'days' ):
+			        	echo '<div class="day">';
+			        		echo $day;
+			        	echo '</div>';
+			        	echo '<div class="times">';
+			        		echo $opening;
+			        		echo '–';
+			        		echo $closing;
+			        	echo '</div>';
+			        endif;
+
+
+			    endwhile;
+
+		?>
+
 		<?php
 			wp_link_pages( array(
 				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentyfifteen' ) . '</span>',
@@ -30,8 +57,10 @@
 				'separator'   => '<span class="screen-reader-text">, </span>',
 			) );
 		?>
+
 	</div><!-- .entry-content -->
 
 	<?php edit_post_link( __( 'Edit', 'twentyfifteen' ), '<footer class="entry-footer"><span class="edit-link">', '</span></footer><!-- .entry-footer -->' ); ?>
 
 </article><!-- #post-## -->
+
