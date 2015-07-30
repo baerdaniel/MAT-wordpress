@@ -14,26 +14,25 @@
 
 	<footer class="site-footer" role="contentinfo">
 		<div class="site-info">
-		FOOTER
 		<?php
 
-		$variable = get_field('field_name', 121);
-		while ( have_rows('opening_times') ) : the_row();
+		while ( have_rows('opening_times' ,121) ) : the_row();
 
 			$day = get_sub_field('day');
-					$opening = get_sub_field('opening');
-					$closing = get_sub_field('closing');
+			$opening = get_sub_field('opening');
+			$closing = get_sub_field('closing');
 
-			        if( get_row_layout() == 'days' ):
-			        	echo '<div class="day">';
-			        		echo $day;
-			        	echo '</div>';
-			        	echo '<div class="times">';
-			        		echo $opening;
-			        		echo '–';
-			        		echo $closing;
-			        	echo '</div>';
-			        endif;
+	        if( get_row_layout() == 'days' ):
+	        	echo '<div class="day">';
+	        		echo $day;
+	        	echo '</div>';
+	        	echo '<div class="times">';
+	        		echo $opening;
+	        		echo '–';
+	        		echo $closing;
+	        	echo '</div>';
+	        endif;
+		endwhile;
 
 		?>
 		</div><!-- .site-info -->

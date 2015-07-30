@@ -22,28 +22,28 @@
 		<?php the_content(); ?>
 
 		<?php the_field('address') ?>
-				<?php
+		<?php
 
-			    // Visit page opening
-			    while ( have_rows('opening_times') ) : the_row();
+		    // Visit page opening
+		    while ( have_rows('opening_times') ) : the_row();
 
-					$day = get_sub_field('day');
-					$opening = get_sub_field('opening');
-					$closing = get_sub_field('closing');
+				$day = get_sub_field('day');
+				$opening = get_sub_field('opening');
+				$closing = get_sub_field('closing');
 
-			        if( get_row_layout() == 'days' ):
-			        	echo '<div class="day">';
-			        		echo $day;
-			        	echo '</div>';
-			        	echo '<div class="times">';
-			        		echo $opening;
-			        		echo '–';
-			        		echo $closing;
-			        	echo '</div>';
-			        endif;
+		        if( get_row_layout() == 'days' ):
+		        	echo '<div class="day">';
+		        		echo $day;
+		        	echo '</div>';
+		        	echo '<div class="times">';
+		        		echo $opening;
+		        		echo '–';
+		        		echo $closing;
+		        	echo '</div>';
+		        endif;
 
 
-			    endwhile;
+		    endwhile;
 
 		?>
 
