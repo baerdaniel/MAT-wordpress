@@ -44,7 +44,7 @@
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed site">
 
-		<header class="site-header" role="banner">
+		<!-- <header class="site-header" role="banner">
 			<div class="site-branding">
 				<?php
 					if ( is_front_page() && is_home() ) : ?>
@@ -53,15 +53,16 @@
 						<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 					<?php endif;
 				?>
-			</div><!-- .site-branding -->
-		</header><!-- .site-header -->
+			</div>
+		</header>  .site-header -->
+
 		<?php
 
-			if ( has_nav_menu( 'primary' ) || has_nav_menu( 'social' ) || is_active_sidebar( 'sidebar-1' )  ) : ?>
+			if ( has_nav_menu( 'primary' ) ) : ?>
 				<div id="secondary" class="secondary">
 
 					<?php if ( has_nav_menu( 'primary' ) ) : ?>
-						<nav id="site-navigation" class="main-navigation" role="navigation">
+						<nav id="site-navigation" class="main-navigation L-1-1" role="navigation">
 							<?php
 								// Primary navigation menu.
 								wp_nav_menu( array(
