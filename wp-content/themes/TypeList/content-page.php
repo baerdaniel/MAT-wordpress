@@ -51,6 +51,8 @@
 
 		if( have_rows('feature_boxes') ):
 
+			echo '<section class="feature-boxes float-container">';
+
 		    // Feature boxes all pages
 		    while ( have_rows('feature_boxes') ) : the_row();
 
@@ -58,62 +60,72 @@
 				$content = get_sub_field('content');
 				$images = get_sub_field('gallery');
 				$video = get_sub_field('video');
+				$singleImage = get_sub_field('image');
 
-				// small boxes
-		        if( get_row_layout() == 'small_box' ):
-		        	echo '<div class="small">';
-			        	echo '<h2>'.$title.'</h2>';
-			        	echo '<div>'.$content.'</div>';
-			        	echo '<div>'.$gallery.'</div>';
-			        	echo '<div>'.$video.'</div>';
-			        echo '</div>'; 
+					// small boxes
+			        if( get_row_layout() == 'small_box' ):
+			        	echo '<div class="feature-box small gutters L-1-3">';
+				        	echo '<h2>'.$title.'</h2>';
+				        	echo '<div>'.$content.'</div>';
+				        	echo '<div>'.$video.'</div>';
+				        	echo '<img src="' . $singleImage['url'] . '" alt="' . $singleImage['alt'] . '" />';
 
-					if( $images ):
-					    echo '<div class="main-gallery">';
-					        foreach( $images as $image ):
-					            echo '<div class="gallery-cell">';
-					        	echo '<li><img src="' . $image['url'] . '" alt="' . $image['alt'] . '" /></li>';
-					            echo '</div>';
-					        endforeach;
-					    echo '</div>';
-					endif;
-		        endif;
 
-		        // medium boxes
-		        if( get_row_layout() == 'medium_box' ):
-		        	echo '<div class="small">';
-			        	echo '<h2>'.$title.'</h2>';
-			        	echo '<div>'.$content.'</div>';
-			        	echo '<div>'.$gallery.'</div>';
-			        	echo '<div>'.$video.'</div>';
-			        echo '</div>';
-		        endif;
+							if( $images ):
+							    echo '<ul class="main-gallery">';
+							        foreach( $images as $image ):
+							            echo '<li class="gallery-cell">';
+							        	echo '<img src="' . $image['url'] . '" alt="' . $image['alt'] . '" />';
+							            echo '</li>';
+							        endforeach;
+							    echo '</ul>';
+							endif;
+						echo '</div>'; 
+			        endif;
 
-		        // gallery
-				if( get_row_layout() == 'gallery' ):
+			        // medium boxes
+			        if( get_row_layout() == 'medium_box' ):
+			        	echo '<div class="feature-box medium gutters L-1-2">';
+				        	echo '<h2>'.$title.'</h2>';
+				        	echo '<div>'.$content.'</div>';
+				        	echo '<div>'.$video.'</div>';
+				        	echo '<img src="' . $singleImage['url'] . '" alt="' . $singleImage['alt'] . '" />';
 
-		        	// check if there are images
-		        	if( have_rows('images') ):
+					        if( $images ):
+							    echo '<ul class="main-gallery">';
+							        foreach( $images as $image ):
+							            echo '<li class="gallery-cell">';
+							        	echo '<img src="' . $image['url'] . '" alt="' . $image['alt'] . '" />';
+							            echo '</li>';
+							        endforeach;
+							    echo '</ul>';
+							endif;
+						echo '</div>';
+			        endif;
 
-					 	echo '<ul>';
+			        // large boxes
+			        if( get_row_layout() == 'large_box' ):
+			        	echo '<div class="feature-box large gutters L-2-3">';
+				        	echo '<h2>'.$title.'</h2>';
+				        	echo '<div>'.$content.'</div>';
+				        	echo '<div>'.$video.'</div>';
+				        	echo '<img src="' . $singleImage['url'] . '" alt="' . $singleImage['alt'] . '" />';
 
-					 	// loop through the images
-					    while ( have_rows('images') ) : the_row();
-
-							$image = get_sub_field('image');
-
-							echo '<li><img src="' . $image['large'] . '" alt="' . $image['alt'] . '" /></li>';
-
-						endwhile;
-
-						echo '</ul>';
-
-					endif;
-
-		        endif;
-
+					        if( $images ):
+							    echo '<ul class="main-gallery">';
+							        foreach( $images as $image ):
+							            echo '<li class="gallery-cell">';
+							        	echo '<img src="' . $image['url'] . '" alt="' . $image['alt'] . '" />';
+							            echo '</li>';
+							        endforeach;
+							    echo '</ul>';
+							endif;
+						echo '</div>';
+			        endif;
 
 		    endwhile;
+
+		    echo '</section> ';
 		endif;
 
 		?>

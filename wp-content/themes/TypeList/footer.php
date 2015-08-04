@@ -60,7 +60,7 @@
 				Mailchimp here
 			</div>
 		</div><!-- .site-info -->
-		<div class='social float-container'>
+		<div class='social inline-block-container'>
 			<?php
 			while ( have_rows('social_media' ,167) ) : the_row();
 				$link = get_sub_field('link');
@@ -73,7 +73,7 @@
 			endwhile;
 			?>
 		</div><!-- .social -->
-		<div class='sponsor float-container'>
+		<div class='sponsor L-1-1'>
 
 			<?php
 			while ( have_rows('sponsors' ,167) ) : the_row();

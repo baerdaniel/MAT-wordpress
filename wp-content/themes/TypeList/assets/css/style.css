@@ -48,6 +48,10 @@ a:hover {
     color: black;
 }
 
+.button {
+    border: 1px solid #ddd;
+}
+
 /* Typography ------------------*/
 
 
@@ -59,8 +63,8 @@ body {
 /* Navigation  ------------------*/
 
 .main-navigation {
-    /*position: fixed;*/
-    top: 0px;
+    position: fixed;
+    top: 30px;
     background-color: #fff;
     z-index: 10;
 }
@@ -69,13 +73,21 @@ body {
 /* Footer  ------------------*/
 
 .site-footer {
-    min-height: 10vh;
-    background-color: red;
+    margin-top: 2em;
+}
+
+.site-footer > * {
+    border-top: 1px solid #ddd;
+    padding: 2em;
+}
+
+.social {
+    text-align: center;
 }
 
 .icon{
-    height: 4em;
-    width: 4em;
+    height: 2em;
+    width: 2em;
     display: inline-block;
     background-size: contain;
     background-position: center center;
@@ -83,26 +95,49 @@ body {
 }
 
 
-a.instagram .icon{
-    background-image: url('../img/instagram.svg');
+    a.instagram .icon{
+        background-image: url('../img/instagram.svg');
+    }
+
+    a.twitter .icon{
+         background-image: url('../img/twitter.svg');
+    }
+
+    a.facebook *{
+        background-image: url('../img/facebook.svg');
+    }
+
+    a.trip-advisor .icon{
+        background-image: url('../img/tripadvisor.svg');
+    }
+
+    a.youtube .icon{
+        background-image: url('../img/youtube.svg');
+    }
+
+
+.sponsor {
+
 }
 
-a.twitter .icon{
-     background-image: url('../img/twitter.svg');
+    .sponsor img {
+        width: auto;
+        height: 5em;
+        margin: 0px auto;
+    }
+
+
+/* PAGES  ---------------------------------------
+--------------------------------------------------*/
+
+/* Feature boxes  ------------------*/
+
+.feature-box {
+display: block;
 }
 
-a.facebook *{
-    background-image: url('../img/facebook.svg');
-}
-
-a.trip-advisor .icon{
-    background-image: url('../img/tripadvisor.svg');
-}
-
-a.youtube .icon{
-    background-image: url('../img/youtube.svg');
-}
-
+    .feature-box.small {
+    }
 
 
 /* LISTING PAGES  ---------------------------------------
@@ -194,13 +229,6 @@ a.youtube .icon{
 }
 
 
-
-
-/* Footer ------------------*/
-
-.page-footer .copyright {
-    text-align: right;
-}
 
 
 
