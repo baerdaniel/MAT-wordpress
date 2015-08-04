@@ -48,6 +48,53 @@
 		?>
 
 		<?php
+
+		    // Feature boxes all pages
+		    while ( have_rows('feature_boxes') ) : the_row();
+
+				$title = get_sub_field('title');
+				$content = get_sub_field('content');
+				$images = get_field('gallery');
+
+				// small box
+		        if( get_row_layout() == 'small_box' ):
+		        	echo '<div class="small">';
+			        	echo '<h2>'.$title.'</h2>';
+			        	echo '<div>'.$content.'</div>';
+			        echo '</div>';
+		        endif;
+
+		        // medium box
+		        if( get_row_layout() == 'medium_box' ):
+		        	echo '<div class="small">';
+			        	echo '<h2>'.$title.'</h2>';
+			        	echo '<div>'.$content.'</div>';
+			        echo '</div>';
+		        endif;
+
+
+
+
+		    endwhile;
+
+		?>
+
+     	<?php 
+
+		$images = get_field('gallery');
+
+		if( $images ): ?>
+		    <div class='main-gallery'>
+		        <?php foreach( $images as $image ): ?>
+		            <div class='gallery-cell'>
+		                <img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" />
+		            </div>
+		        <?php endforeach; ?>
+		    </div>
+		<?php endif; ?>
+
+
+		<?php
 			wp_link_pages( array(
 				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentyfifteen' ) . '</span>',
 				'after'       => '</div>',

@@ -23,15 +23,13 @@ get_header(); ?>
 			<div class='whats-on float-container'>
 				<?php if ( have_posts() ) : ?>
 
-					<?php if ( is_home() && ! is_front_page() ) : ?>
-						<header>
-							<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-						</header>
-					<?php endif; ?>
-
 					<?php
 					// Start the loop.
-					while ( have_posts() ) : the_post();
+					query_posts('cat=7,1');
+					//$cat = get_category_by_slug('exhibitions'); // get category object
+					//$cat = pll_get_term($cat->term_id); // get id of translation
+					//query_posts("cat=$cat&order=asc");
+					while (have_posts()) : the_post();
 
 						/*
 						 * Include the Post-Format-specific template for the content.
@@ -58,6 +56,7 @@ get_header(); ?>
 				?>
 			</div> <!-- .whats-on -->
 
+			<?php include 'content-page-php';?>
 
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
