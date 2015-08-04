@@ -66,7 +66,7 @@
 							<?php
 								// Primary navigation menu.
 								wp_nav_menu( array(
-									'menu_class'     => 'nav-menu',
+									'menu_class'     => 'nav-menu inline-block-container',
 									'theme_location' => 'primary',
 								) );
 							?>

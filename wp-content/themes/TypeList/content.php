@@ -23,6 +23,11 @@
 	</div>
 
 	<header class="entry-header">
+		<?php the_field ('start_date') ?>
+		<?php the_field ('end_date') ?>
+		<?php the_field ('start_time') ?>
+		<?php the_field ('end_time') ?>
+		
 		<?php
 			if ( is_single() ) :
 				the_title( '<h1 class="entry-title">', '</h1>' );

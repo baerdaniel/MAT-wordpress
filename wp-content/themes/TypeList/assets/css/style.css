@@ -73,6 +73,36 @@ body {
     background-color: red;
 }
 
+.icon{
+    height: 4em;
+    width: 4em;
+    display: inline-block;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+
+a.instagram .icon{
+    background-image: url('../img/instagram.svg');
+}
+
+a.twitter .icon{
+     background-image: url('../img/twitter.svg');
+}
+
+a.facebook *{
+    background-image: url('../img/facebook.svg');
+}
+
+a.trip-advisor .icon{
+    background-image: url('../img/tripadvisor.svg');
+}
+
+a.youtube .icon{
+    background-image: url('../img/youtube.svg');
+}
+
 
 
 /* LISTING PAGES  ---------------------------------------
@@ -90,7 +120,7 @@ body {
     position: relative;
 }
 
-.whats-on article.category-events {
+.whats-on .category-events {
     width: 50%;
 }
 
@@ -99,9 +129,13 @@ body {
     height: 0;
     padding-bottom: 27%;
     overflow: hidden;
-    background-size: contain !important;
+    background-size: cover !important;
     background-position: center !important;
     background-attachment: fixed !important;
+}
+
+.category-events .poster {
+     background-attachment: scroll !important;
 }
 
 .poster:hover {
