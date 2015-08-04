@@ -49,49 +49,75 @@
 
 		<?php
 
+		if( have_rows('feature_boxes') ):
+
 		    // Feature boxes all pages
 		    while ( have_rows('feature_boxes') ) : the_row();
 
 				$title = get_sub_field('title');
 				$content = get_sub_field('content');
-				$images = get_field('gallery');
+				$images = get_sub_field('gallery');
+				$video = get_sub_field('video');
 
-				// small box
+				// small boxes
 		        if( get_row_layout() == 'small_box' ):
 		        	echo '<div class="small">';
 			        	echo '<h2>'.$title.'</h2>';
 			        	echo '<div>'.$content.'</div>';
-			        echo '</div>';
+			        	echo '<div>'.$gallery.'</div>';
+			        	echo '<div>'.$video.'</div>';
+			        echo '</div>'; 
+
+					if( $images ):
+					    echo '<div class="main-gallery">';
+					        foreach( $images as $image ):
+					            echo '<div class="gallery-cell">';
+					        	echo '<li><img src="' . $image['url'] . '" alt="' . $image['alt'] . '" /></li>';
+					            echo '</div>';
+					        endforeach;
+					    echo '</div>';
+					endif;
 		        endif;
 
-		        // medium box
+		        // medium boxes
 		        if( get_row_layout() == 'medium_box' ):
 		        	echo '<div class="small">';
 			        	echo '<h2>'.$title.'</h2>';
 			        	echo '<div>'.$content.'</div>';
+			        	echo '<div>'.$gallery.'</div>';
+			        	echo '<div>'.$video.'</div>';
 			        echo '</div>';
 		        endif;
 
+		        // gallery
+				if( get_row_layout() == 'gallery' ):
 
+		        	// check if there are images
+		        	if( have_rows('images') ):
+
+					 	echo '<ul>';
+
+					 	// loop through the images
+					    while ( have_rows('images') ) : the_row();
+
+							$image = get_sub_field('image');
+
+							echo '<li><img src="' . $image['large'] . '" alt="' . $image['alt'] . '" /></li>';
+
+						endwhile;
+
+						echo '</ul>';
+
+					endif;
+
+		        endif;
 
 
 		    endwhile;
+		endif;
 
 		?>
 
-     	<?php 
-
-		$images = get_field('gallery');
-
-		if( $images ): ?>
-		    <div class='main-gallery'>
-		        <?php foreach( $images as $image ): ?>
-		            <div class='gallery-cell'>
-		                <img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" />
-		            </div>
-		        <?php endforeach; ?>
-		    </div>
-		<?php endif; ?>
 
 
 		<?php
