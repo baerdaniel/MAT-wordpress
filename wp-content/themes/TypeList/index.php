@@ -62,5 +62,17 @@ get_header(); ?>
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
 
-<?php get_footer(); ?>
+
+	<!-- language footers -->
+	<?php
+		$currentlang = get_bloginfo('language');
+		if($currentlang=="en-US"):
+			get_footer();
+	?>
+	<?php else: 
+		include 'footer-spanish.php';
+	?>
+	<?php endif; ?>
+
+
 

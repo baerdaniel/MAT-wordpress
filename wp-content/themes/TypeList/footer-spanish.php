@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying the footer
+ * spanish footer
  *
  * Contains the closing of the "site-content" div and all content after.
  *
@@ -38,26 +38,23 @@
 				</div>
 			</div>
 			<div class='L-1-3'>
-
 				<?php
 				while ( have_rows('support' ,167) ) : the_row();
-					$link = get_sub_field('support_page_en');
-					$label = get_sub_field('support_title_en');
-					$text = get_sub_field('support_text_en');
+					$link = get_sub_field('support_page_es');
+					$label = get_sub_field('support_title_es');
+					$text = get_sub_field('support_text_es');
 
-			        if( get_row_layout() == 'support_en' ):
+			        if( get_row_layout() == 'support_es' ):
 			        	echo '<p class="">'.$text.'</p>';
-			        	echo '<a class="button" href="'.$link.'">'.$label.'</a>';
+			        	echo '<a class="button" href="/apoyar">'.$label.'</a>';
 			        endif;
 				endwhile;
 				?>
 
 
-
-
 			</div>
 			<div class='L-1-3'>
-				Mailchimp here
+					Mailchimp aqui
 			</div>
 		</div><!-- .site-info -->
 		<div class='social float-container'>
@@ -77,7 +74,8 @@
 
 			<?php
 			while ( have_rows('sponsors' ,167) ) : the_row();
-				
+
+				$sponsor = get_sub_field('sponsor_text_es');
 				$sponsor = get_sub_field('sponsor_logo');
 
 		        if( get_row_layout() == 'sponsors' ):
