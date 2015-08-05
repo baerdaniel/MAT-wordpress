@@ -3,8 +3,8 @@
  * The template for displaying the header
  * 
  * @package WordPress
- * @subpackage Type List
- * @since Type List 0
+ * @subpackage Mate
+ * @since Mate 0
  */
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
