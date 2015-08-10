@@ -36,7 +36,18 @@
 				the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' );
 			endif;
 		?>-->
-		<?php the_category() ?>
+
+		<?php
+			$categories = get_the_category($post->ID);
+			foreach($categories as $category) :
+				$children = get_categories( array ('parent' => $category->term_id ));
+				$has_children = count($children);
+				if ( $has_children == 0 ) {
+			 	echo $category->name;
+				}
+			endforeach;
+		?>
+
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">

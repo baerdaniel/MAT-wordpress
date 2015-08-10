@@ -161,7 +161,7 @@ function twentyfifteen_setup() {
 	// This theme uses wp_nav_menu() in two locations.
 	register_nav_menus( array(
 		'primary' => __( 'Primary Menu',      'twentyfifteen' ),
-		'social'  => __( 'Social Links Menu', 'twentyfifteen' ),
+		'secondary'  => __( 'Secondary Menu', 'twentyfifteen' ),
 	) );
 
 	/*
@@ -364,15 +364,16 @@ add_action( 'wp_enqueue_scripts', 'twentyfifteen_post_nav_background' );
  * @param array   $args        wp_nav_menu() arguments.
  * @return string Menu item with possible description.
  */
-function twentyfifteen_nav_description( $item_output, $item, $depth, $args ) {
-	if ( 'primary' == $args->theme_location && $item->description ) {
-		$item_output = str_replace( $args->link_after . '</a>', '<div class="menu-item-description">' . $item->description . '</div>' . $args->link_after . '</a>', $item_output );
-	}
-
-	return $item_output;
-}
-add_filter( 'walker_nav_menu_start_el', 'twentyfifteen_nav_description', 10, 4 );
-
+/**
+ *function twentyfifteen_nav_description( $item_output, $item, $depth, $args ) {
+ *	if ( 'primary' == $args->theme_location && $item->description ) {
+ *		$item_output = str_replace( $args->link_after . '</a>',  . $item->description . '</div>' . $args->link_after . '</a>', $item_output );
+ *	}
+ *
+ *	return $item_output;
+ *} 
+ *add_filter( 'walker_nav_menu_start_el', 'twentyfifteen_nav_description', 10, 4 );
+ */
 /**
  * Add a `screen-reader-text` class to the search form's submit button.
  *

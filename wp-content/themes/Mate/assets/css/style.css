@@ -24,12 +24,25 @@
 
 @font-face {
     font-family: 'Calibre';
-    src: url('../fonts/CalibreWeb-Black.eot');
-    src: url('../fonts/CalibreWeb-Black.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/CalibreWeb-Black.woff') format('woff');
+    src: url('../fonts/CalibreWeb-#000000.eot');
+    src: url('../fonts/CalibreWeb-#000000.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/CalibreWeb-#000000.woff') format('woff');
     font-weight: 800;
     font-style: normal;
 }
+
+
+/* References  ---------------------------------------
+--------------------------------------------------*/
+
+/*
+Light Grey 
+color: #ddd;*/
+
+/*
+Medium Grey 
+color: #a3a3a3;*/
+
 
 
 
@@ -40,12 +53,12 @@
 /* Links  ------------------*/
 
 a {
-    color: grey;
+    color: #000000;
     text-decoration: none;
 }
 
 a:hover {
-    color: black;
+    color: #a3a3a3;
 }
 
 .button {
@@ -77,12 +90,41 @@ h4{}
 
 /* Navigation  ------------------*/
 
-.main-navigation {
+.header-menu {
     position: fixed;
-    top: 30px;
+    top: 0px;
     background-color: #fff;
     z-index: 10;
 }
+
+.header-menu ul li a{
+    padding: 0 0.5em;
+    line-height: 3em;
+}
+
+.main-nav {
+    font-size: 1.25em;
+    border-right: 1px solid #ddd;
+}
+
+.sub-nav {
+    float: right;
+}
+
+.sub-nav-menu {
+    padding-right: 0.5em;
+}
+
+.lang-nav {
+    text-transform: capitalize;
+    border-left: 1px solid #ddd;
+    padding: 0 0.5em;
+}
+
+.lang-nav .current-lang a{
+    color: #a3a3a3;
+}
+
 
 
 /* Footer  ------------------*/

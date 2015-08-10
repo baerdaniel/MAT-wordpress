@@ -56,26 +56,37 @@
 			</div>
 		</header>  .site-header -->
 
-		<?php
+		<div class="header-menu float-container L-1-1">
 
-			if ( has_nav_menu( 'primary' ) ) : ?>
-				<div id="secondary" class="secondary">
+			<?php if ( has_nav_menu( 'primary' ) ) : ?>
+				<nav id="site-nav" class="main-nav L-1-2 float-container" role="navigation">
+					<?php
+						// Primary navigation menu.
+						wp_nav_menu( array(
+							'menu_class'     => 'main-nav-menu inline-block-container',
+							'theme_location' => 'primary',
+						) );
+					?>
+				</nav><!-- .main-navigation -->
+			<?php endif; ?>
+			<?php if ( has_nav_menu( 'secondary' ) ) : ?>
+				<nav class="sub-nav float-container" role="navigation">
+					<?php
+						// Secondary navigation menu.
+						wp_nav_menu( array(
+							'menu_class'     => 'sub-nav-menu inline-block-container',
+							'theme_location' => 'secondary',
+						) );
+					?>
+					<button class='search button'>S</button>
+					<ul class='lang-nav inline-block-container'>
+						<?php pll_the_languages( array('display_names_as'=>'slug')); ?>
+					</ul>
+				</nav><!-- .sub-navigation -->
+			<?php endif; ?>
 
-					<?php if ( has_nav_menu( 'primary' ) ) : ?>
-						<nav id="site-navigation" class="main-navigation L-1-1" role="navigation">
-							<?php
-								// Primary navigation menu.
-								wp_nav_menu( array(
-									'menu_class'     => 'nav-menu inline-block-container',
-									'theme_location' => 'primary',
-								) );
-							?>
-						</nav><!-- .main-navigation -->
-					<?php endif; ?>
+		</div><!-- .header-menu -->
 
-				</div><!-- .secondary -->
 
-		<?php endif; ?>
-		<ul><?php pll_the_languages( array('display_names_as'=>'slug')); ?></ul>
 
 	<div id="content" class="site-content">

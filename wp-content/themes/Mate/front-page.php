@@ -1,6 +1,6 @@
 <?php
 /**
- * The main template file
+ * The FRONT PAGE
  *
  * This is the most generic template file in a WordPress theme
  * and one of the two required files for a theme (the other being style.css).
@@ -40,8 +40,10 @@ get_header(); ?>
 				?>
 			</div> <!-- .whats-on -->
 
+
 			<?php
 			// Start the loop.
+			query_posts('page_id=211z');
 			while ( have_posts() ) : the_post();
 
 				// Include the page content template.
@@ -54,7 +56,6 @@ get_header(); ?>
 			
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
-
 
 	<!-- language footers -->
 	<?php
