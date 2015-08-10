@@ -14,7 +14,7 @@
 
 	<footer class="site-footer trunk" role="contentinfo">
 		<div class='site-info float-container'>
-			<div class='L-1-3 gutters'>
+			<div class='L-1-3 M-1-2 S-1-1 gutters'>
 				<div class='address'>
 					<?php
 					while ( have_rows('address' ,167) ) : the_row();
@@ -52,7 +52,7 @@
 					?>
 				</div>
 			</div>
-			<div class='L-1-3 gutters'>
+			<div class='L-1-3 M-1-2 S-1-1 gutters'>
 
 				<?php
 				while ( have_rows('support' ,167) ) : the_row();
@@ -73,7 +73,7 @@
 
 
 			</div>
-			<div class='L-1-3 gutters'>
+			<div class='L-1-3 M-1-2 S-1-1 gutters'>
 				<?php
 				while ( have_rows('newsletter' ,167) ) : the_row();
 					$title = get_sub_field('newsletter_title_en');

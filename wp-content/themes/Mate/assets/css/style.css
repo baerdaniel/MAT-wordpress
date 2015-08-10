@@ -192,15 +192,26 @@ display: block;
 }
 
 .poster:hover {
-    background-image: none !important;
     }
 
 .entry-header {
-    font-family: 'Calibre';
-    font-weight: 700;
-    font-size: 2em;
+    max-width: 50%;
     position: absolute;
-    top: 0;
+    bottom: 0;
+    color: white;
+    font-weight: 700;
+    font-size: 1.25em;
+}
+
+.entry-header h1 {
+    font-size: 2em;
+    border: 2px solid #fff;
+    padding: 0 0.5em ;
+    /*background-color: rgba(0, 0, 0, 0.1);*/
+}
+
+.category-events .entry-header h1 {
+    font-size: 1.25em;
 }
 
 /* Single Items  ------------------*/

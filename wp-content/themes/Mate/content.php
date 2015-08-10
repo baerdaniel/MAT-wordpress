@@ -27,14 +27,15 @@
 		<?php the_field ('end_date') ?>
 		<?php the_field ('start_time') ?>
 		<?php the_field ('end_time') ?>
+		<h1><?php the_title() ?></h1>
 		
-		<?php
+		<!--<?php
 			if ( is_single() ) :
 				the_title( '<h1 class="entry-title">', '</h1>' );
 			else :
 				the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' );
 			endif;
-		?>
+		?>-->
 		<?php the_category() ?>
 	</header><!-- .entry-header -->
 
