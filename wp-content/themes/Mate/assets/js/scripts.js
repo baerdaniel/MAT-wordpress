@@ -20,6 +20,7 @@ $(window).load(function(){
 	  imagesLoaded: true,
 	  accessibility: false,
 	  // freeScroll: true,
+	  setGallerySize: false,
 	  cellSelector: '.main-gallery .gallery-cell'
 	});
 });

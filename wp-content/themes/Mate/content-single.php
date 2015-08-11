@@ -24,9 +24,7 @@
 		$src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), '' );
 	?>
 	<div class='poster trunk' style="background: url(<?php echo $src[0]; ?> )">
-	</div>
-
-	<header class="entry-header">
+		<header class="entry-header">
 
 		<?php the_field ('start_date') ?>
 		<?php the_field ('end_date') ?>
@@ -40,86 +38,71 @@
 				the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' );
 			endif;
 		?>
-				<?php the_field('subtitle') ?>
-		<?php the_category() ?>
+		<?php
+			$categories = get_the_category($post->ID);
+			foreach($categories as $category) :
+				$children = get_categories( array ('parent' => $category->term_id ));
+				$has_children = count($children);
+				if ( $has_children == 0 ) {
+			 	echo $category->name;
+				}
+			endforeach;
+		?>
 	</header><!-- .entry-header -->
+
+	</div>
+
+
 
 	<div class="entry-content trunk">
 
-
-		<?php the_content() ?>
-
-     	<?php 
-
-		$images = get_field('gallery');
-
-		if( $images ): ?>
-		    <div class='main-gallery'>
-		        <?php foreach( $images as $image ): ?>
-		            <div class='gallery-cell'>
-		                <img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" />
-		                <!-- <figcaption><?php echo $image['caption']; ?></figcaption> -->
-		            </div>
-		        <?php endforeach; ?>
-		    </div>
-		<?php endif; ?>
-
 		<?php
-
-			    // video embed
-			    while ( have_rows('videos') ) : the_row();
-
-					$video = get_sub_field('video');
-
-			        if( get_row_layout() == 'youtube' ):
-			        	echo '<div class="video">';
-			        		echo '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/' . $video . '?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>';
-			        	echo '</div>';
-			        endif;
-
-			        if( get_row_layout() == 'vimeo' ):
-			        	echo '<div class="video">';
-			        		echo '<iframe width="100%" height="auto" src="https://player.vimeo.com/video/' . $video . '?color=ffffff&title=0&byline=0&portrait=0 frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
-			        	echo '</div>';
-			        endif;
-
-			    endwhile;
-
+			$categories = get_the_category($post->ID);
+			foreach($categories as $category) :
+				$children = get_categories( array ('parent' => $category->term_id ));
+				$has_children = count($children);
+				if ( $has_children == 0 ) {
+				echo '<div class="related-cat L-1-3 M-1-1 gutters">';
+			 	echo '<h3>';
+			 	echo $category->name;
+			 	echo '</h3>';
+			 	echo $category->description;	
+			 	echo '</div>';			 	
+				}
+			endforeach;
 		?>
 
-
 		<?php
+		if( have_rows('flexible_content') ):
 
-			    // various
-			    while ( have_rows('content_boxes') ) : the_row();
+			while ( have_rows('flexible_content') ) : the_row();
 
-					$image = get_sub_field('image');
-					$title = get_sub_field('title');
-					$body = get_sub_field('body');
+				$images = get_sub_field('gallery');
+				$video = get_sub_field('video');
+				$copy = get_sub_field('copy');
 
-			        if( get_row_layout() == 'narrow' ):
+				if( $images ):
 
-			        	echo '<div class="narrow">';
-			        		echo '<div class="image">' . $image . '</div>';
-			        		echo '<h3 class="">' . $title . '</h3>';
-			        		echo '<p>' . $body . '</p>';
-			        	echo '</div>';
+				    echo '<section class="L-1-1 gutters"><ul class="main-gallery">';
+				        foreach( $images as $image ):
+				            echo '<li class="gallery-cell">';
+				        	echo '<img src="' . $image['url'] . '" alt="' . $image['alt'] . '" />';
+				            echo '</li>';
+				        endforeach;
+				    echo '</ul></section>';
+				endif;
 
-			        endif;
-			        if( get_row_layout() == 'wide' ):
+				if( $video ):
+			        echo '<section class="L-2-3 M-1-1 gutters"><div class="video">'.$video.'</div></section>';
+			    endif;
 
-			        	echo '<div class="wide">';
-			        		echo '<div class="image">' . $image . '</div>';
-			        		echo '<h3 class="">' . $title . '</h3>';
-			        		echo '<p>' . $body . '</p>';
-			        	echo '</div>';
+			    if( $copy ):
+			    	echo '<section class="L-2-3 M-1-1 gutters"><div class="copy">'.$copy.'</div></section>';
+			    endif;
 
-			        endif;
+			endwhile;
+		endif; ?>
 
-
-			    endwhile;
-
-		?>
 
 
 		<?php
@@ -128,15 +111,17 @@
 			    while ( have_rows('participants') ) : the_row();
 
 					$image = get_sub_field('image');
-					$title = get_sub_field('title');
+					$name = get_sub_field('name');
+					$life = get_sub_field('life_short');
 					$bio = get_sub_field('bio');
 
 			        if( get_row_layout() == 'participant' ):
 
 			        	echo '<div class="participant float-container">';
-			        		echo '<div class="portrait L-1-4"><img src="' . $image['sizes']['large'] . '"></div>';
-			        		echo '<div class="L-3-4">';
-			        			echo '<h3 class="">' . $name . '</h3>';
+			        		echo '<div class="portrait L-1-4 gutters"><img src="' . $image['sizes']['large'] . '"></div>';
+			        		echo '<div class="L-3-4 gutters">';
+			        			echo '<h2 class="">' . $name . '</h2>';
+			        			echo '<p class="life">' . $life . '</p>';
 			        			echo '<p>' . $bio . '</p>';
 			        		echo '</div>';
 			        	echo '</div>';

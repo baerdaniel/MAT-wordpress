@@ -13,8 +13,10 @@
 		twentyfifteen_post_thumbnail();
 	?>
 
-	<header class="entry-header">
+	<header class="page-header">
+
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+		
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
@@ -50,7 +52,7 @@
 
 		if( have_rows('feature_boxes') ):
 
-			echo '<section class="feature-boxes float-container">';
+			echo '<section class="feature-boxes trunk inline-block-container">';
 
 		    // Feature boxes all pages
 		    while ( have_rows('feature_boxes') ) : the_row();
@@ -66,7 +68,10 @@
 					// small boxes
 			        if( get_row_layout() == 'small_box' ):
 			        	echo '<div class="feature-box small gutters L-1-3">';
-			        		echo '<div>'.$video.'</div>';
+
+			        		if( $video ):
+			        			echo '<div>'.$video.'</div>';
+			        		endif;
 			        		if( $singleImage ):
 				        		echo '<img src="' . $singleImage['url'] . '" alt="' . $singleImage['alt'] . '" />';
 				        	endif;
@@ -79,20 +84,31 @@
 							        endforeach;
 							    echo '</ul>';
 							endif;
-				        	echo '<h2>'.$title.'</h2>';
-				        	echo '<div>'.$content.'</div>';
-				        	echo '<a href='.$link.' class="button">' .$label.'</a>';
 
-				        	
+							if( $title ):
+					        	echo '<h2>'.$title.'</h2>';
+					        endif;
+							if( $content ):
+				        		echo '<div>'.$content.'</div>';
+				        	endif;
+							if( $link ):
+				        		echo '<a href='.$link.' class="button">' .$label.'</a>';
+				        	endif;
+
 						echo '</div>'; 
 			        endif;
 
 			        // medium boxes
 			        if( get_row_layout() == 'medium_box' ):
 			        	echo '<div class="feature-box medium gutters L-1-2">';
-				        	echo '<div>'.$video.'</div>';
-				        	echo '<img src="' . $singleImage['url'] . '" alt="' . $singleImage['alt'] . '" />';  
-					        if( $images ):
+
+							if( $video ):
+			        			echo '<div>'.$video.'</div>';
+			        		endif;
+			        		if( $singleImage ):
+				        		echo '<img src="' . $singleImage['url'] . '" alt="' . $singleImage['alt'] . '" />';
+				        	endif;
+							if( $images ):
 							    echo '<ul class="main-gallery">';
 							        foreach( $images as $image ):
 							            echo '<li class="gallery-cell">';
@@ -101,18 +117,31 @@
 							        endforeach;
 							    echo '</ul>';
 							endif;
-				        	echo '<h2>'.$title.'</h2>';
-				        	echo '<div>'.$content.'</div>';
-				        	echo '<a href='.$link.' class="button">' .$label.'</a>';
+
+							if( $title ):
+					        	echo '<h2>'.$title.'</h2>';
+					        endif;
+							if( $content ):
+				        		echo '<div>'.$content.'</div>';
+				        	endif;
+							if( $link ):
+				        		echo '<a href='.$link.' class="button">' .$label.'</a>';
+				        	endif;
+
 						echo '</div>';
 			        endif;
 
 			        // large boxes
 			        if( get_row_layout() == 'large_box' ):
 			        	echo '<div class="feature-box large gutters L-2-3">';
-				        	echo '<div>'.$video.'</div>';
-				        	echo '<img src="' . $singleImage['url'] . '" alt="' . $singleImage['alt'] . '" />';
-					        if( $images ):
+				        	
+				        	if( $video ):
+			        			echo '<div>'.$video.'</div>';
+			        		endif;
+			        		if( $singleImage ):
+				        		echo '<img src="' . $singleImage['url'] . '" alt="' . $singleImage['alt'] . '" />';
+				        	endif;
+							if( $images ):
 							    echo '<ul class="main-gallery">';
 							        foreach( $images as $image ):
 							            echo '<li class="gallery-cell">';
@@ -122,9 +151,15 @@
 							    echo '</ul>';
 							endif;
 
-				        	echo '<h2>'.$title.'</h2>';
-				        	echo '<div>'.$content.'</div>';
-				        	echo '<a href='.$link.' class="button">' .$label.'</a>';
+							if( $title ):
+					        	echo '<h2>'.$title.'</h2>';
+					        endif;
+							if( $content ):
+				        		echo '<div>'.$content.'</div>';
+				        	endif;
+							if( $link ):
+				        		echo '<a href='.$link.' class="button">' .$label.'</a>';
+				        	endif;
 
 						echo '</div>';
 			        endif;

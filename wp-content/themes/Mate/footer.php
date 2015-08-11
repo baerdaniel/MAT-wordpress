@@ -12,80 +12,80 @@
 
 	</div><!-- .site-content -->
 
-	<footer class="site-footer trunk" role="contentinfo">
-		<div class='site-info float-container'>
-			<div class='L-1-3 M-1-2 S-1-1 gutters'>
-				<div class='address'>
-					<?php
-					while ( have_rows('address' ,167) ) : the_row();
-						$title = get_sub_field('address_title_en');
-						$label = get_sub_field('address_label_en');
-						$address = get_field('address' ,121);
+	<footer class="site-footer L-1-1" role="contentinfo">
+			<div class=''>
+				<div class='trunk  float-container'>
 
-				        if( get_row_layout() == 'address' ):
+				<div class='L-1-3 M-1-2 S-1-1 gutters'>
+					<div class='address'>
+						<?php
+						while ( have_rows('address' ,167) ) : the_row();
+							$title = get_sub_field('address_title_en');
+							$label = get_sub_field('address_label_en');
+							$address = get_field('address' ,121);
+
+					        if( get_row_layout() == 'address' ):
+					        	echo '<h4>'.$title.'</h4>';
+					        	echo '<p>'.$address.'</p>';
+					        	echo '<a class="button" href="/support">'.$label.'</a>';
+					        endif;
+						endwhile;
+						?>
+
+					</div>
+					<div class="opening-times inline-block-container">
+						<?php
+						while ( have_rows('opening_times' ,121) ) : the_row();
+							$day = get_sub_field('day');
+							$opening = get_sub_field('opening');
+							$closing = get_sub_field('closing');
+
+					        if( get_row_layout() == 'days' ):
+					        	echo '<div class="day L-1-2">';
+					        		echo $day;
+					        	echo '</div>';
+					        	echo '<div class="times L-1-2">';
+					        		echo $opening;
+					        		echo '–';
+					        		echo $closing;
+					        	echo '</div>';
+					        endif;
+						endwhile;
+						?>
+					</div>
+				</div>
+				<div class='L-1-3 M-1-2 S-1-1 gutters'>
+
+					<?php
+					while ( have_rows('support' ,167) ) : the_row();
+						$title = get_sub_field('support_title_en');
+						$text = get_sub_field('support_text_en');
+						$label = get_sub_field('support_label_en');
+						$link = get_sub_field('support_page_en');
+
+				        if( get_row_layout() == 'support' ):
 				        	echo '<h4>'.$title.'</h4>';
-				        	echo '<p>'.$address.'</p>';
-				        	echo '<a class="button" href="/support">'.$label.'</a>';
+				        	echo '<p class="">'.$text.'</p>';
+				        	echo '<a class="button" href="'.$link.'">'.$label.'</a>';
 				        endif;
 					endwhile;
 					?>
 
 				</div>
-				<div class="opening-times inline-block-container">
+				<div class='L-1-3 M-1-2 S-1-1 gutters'>
 					<?php
-					while ( have_rows('opening_times' ,121) ) : the_row();
-						$day = get_sub_field('day');
-						$opening = get_sub_field('opening');
-						$closing = get_sub_field('closing');
+					while ( have_rows('newsletter' ,167) ) : the_row();
+						$title = get_sub_field('newsletter_title_en');
+						$text = get_sub_field('newsletter_text_en');
 
-				        if( get_row_layout() == 'days' ):
-				        	echo '<div class="day L-1-2">';
-				        		echo $day;
-				        	echo '</div>';
-				        	echo '<div class="times L-1-2">';
-				        		echo $opening;
-				        		echo '–';
-				        		echo $closing;
-				        	echo '</div>';
+				        if( get_row_layout() == 'newsletter' ):
+				        	echo '<h4 class="">'.$title.'</h4>';
+				        	echo '<p class="">'.$text.'</p>';
+				        	
 				        endif;
 					endwhile;
 					?>
 				</div>
-			</div>
-			<div class='L-1-3 M-1-2 S-1-1 gutters'>
-
-				<?php
-				while ( have_rows('support' ,167) ) : the_row();
-					$title = get_sub_field('support_title_en');
-					$text = get_sub_field('support_text_en');
-					$label = get_sub_field('support_label_en');
-					$link = get_sub_field('support_page_en');
-
-			        if( get_row_layout() == 'support' ):
-			        	echo '<h4>'.$title.'</h4>';
-			        	echo '<p class="">'.$text.'</p>';
-			        	echo '<a class="button" href="'.$link.'">'.$label.'</a>';
-			        endif;
-				endwhile;
-				?>
-
-
-
-
-			</div>
-			<div class='L-1-3 M-1-2 S-1-1 gutters'>
-				<?php
-				while ( have_rows('newsletter' ,167) ) : the_row();
-					$title = get_sub_field('newsletter_title_en');
-					$text = get_sub_field('newsletter_text_en');
-
-			        if( get_row_layout() == 'newsletter' ):
-			        	echo '<h4 class="">'.$title.'</h4>';
-			        	echo '<p class="">'.$text.'</p>';
-			        	
-			        endif;
-				endwhile;
-				?>
 			</div>
 		</div><!-- .site-info -->
 		<div class='social inline-block-container'>

@@ -680,50 +680,102 @@ function acf_get_pretty_post_types( $post_types = array() ) {
 *  @return	(boolean)
 */
 
-function acf_verify_nonce( $nonce, $post_id = 0 ) {
+function acf_verify_nonce( $value, $post_id = 0 ) {
 	
 	// vars
-	$r = false;
+	$nonce = acf_maybe_get( $_POST, '_acfnonce' );
 	
 	
-	// note: don't reset _acfnonce here, only when $r is set to true. This solves an issue caused by other save_post actions using this function with a different $nonce
-	
-	
-	// check
-	if( isset($_POST['_acfnonce']) ) {
-
-		// verify nonce 'post|user|comment|term'
-		if( is_string($_POST['_acfnonce']) && wp_verify_nonce($_POST['_acfnonce'], $nonce) ) {
-			
-			$r = true;
-			
-			
-			// remove potential for inifinite loops
-			$_POST['_acfnonce'] = false;
-			
+	// bail early if no nonce or if nonce does not match (post|user|comment|term)
+	if( !$nonce || !wp_verify_nonce($nonce, $value) ) {
 		
-			// if we are currently saving a revision, allow its parent to bypass this validation
-			if( $post_id && $parent = wp_is_post_revision($post_id) ) {
-				
-				// revision: set parent post_id
-				$_POST['_acfnonce'] = $parent;
-				
-			}
+		return false;
+		
+	}
+	
+	
+	// reset nonce (only allow 1 save)
+	$_POST['_acfnonce'] = false;
+	
+	
+	// if saving specific post
+	if( $post_id ) {
+		
+		// vars
+		$form_post_id = (int) acf_maybe_get( $_POST, 'post_ID' );
+		$post_parent = wp_is_post_revision( $post_id );
+		
+		
+		// if no $_POST['post_id'] (shopp plugin)
+		if( !$form_post_id ) {
 			
-		} elseif( $_POST['_acfnonce'] === $post_id ) {
+			// do nothing
 			
-			$r = true;
+		// if $post_id is a match to the submitted form
+		} elseif( $post_id === $form_post_id ) {
 			
-			// remove potential for inifinite loops
-			$_POST['_acfnonce'] = false;
+			// do nothing, nonce is already reset (don't remove this if statement!)
+			
+		// if $post_id is a revision of the submited form
+		} elseif( $post_parent === $form_post_id ) {
+			
+			// add nonce back in to allow 1 more save (when the real post is saved)
+			$_POST['_acfnonce'] = $nonce;
+			
+		// if $post_id does not match either
+		} else {
+			
+			return false;
 			
 		}
 		
 	}
-		
+	
 	
 	// return
-	return $r;
+	return true;
+		
+}
+
+
+/*
+*  acf_verify_ajax
+*
+*  This function will return true if the current AJAX request is valid
+*  It's action will also allow WPML to set the lang and avoid AJAX get_posts issues
+*
+*  @type	function
+*  @date	7/08/2015
+*  @since	5.2.3
+*
+*  @param	n/a
+*  @return	(boolean)
+*/
+
+function acf_verify_ajax() {
+	
+	// bail early if not acf action
+	if( empty($_POST['action']) || substr($_POST['action'], 0, 3) !== 'acf' ) {
+		
+		return false;
+		
+	}
+	
+	
+	// bail early if not acf nonce
+	if( empty($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'acf_nonce') ) {
+	
+		return false;
+		
+	}
+	
+	
+	// action for 3rd party customization
+	do_action('acf/verify_ajax');
+	
+	
+	// return
+	return true;
 	
 }
 
@@ -1248,7 +1300,7 @@ function acf_get_posts( $args = array() ) {
 	$args = acf_parse_args( $args, array(
 		'posts_per_page'	=> -1,
 		'post_type'			=> '',
-		'post_status'		=> 'any',
+		'post_status'		=> 'any'
 	));
 	
 
@@ -1273,7 +1325,7 @@ function acf_get_posts( $args = array() ) {
 		
 		// add filter to remove post_type
 		// use 'query' filter so that 'suppress_filters' can remain true
-		add_filter('query', '_acf_get_posts_query');
+		//add_filter('query', '_acf_query_remove_post_type');
 		
 		
 		// order by post__in
@@ -1284,6 +1336,10 @@ function acf_get_posts( $args = array() ) {
 	
 	// load posts in 1 query to save multiple DB calls from following code
 	$posts = get_posts($args);
+	
+	
+	// remove this filter (only once)
+	//remove_filter('query', '_acf_query_remove_post_type');
 	
 	
 	// validate order
@@ -1314,7 +1370,7 @@ function acf_get_posts( $args = array() ) {
 
 
 /*
-*  _acf_get_posts_query
+*  _acf_query_remove_post_type
 *
 *  This function will remove the 'wp_posts.post_type' WHERE clause completely
 *  When using 'post__in', this clause is unneccessary and slow.
@@ -1327,17 +1383,29 @@ function acf_get_posts( $args = array() ) {
 *  @return	$sql
 */
 
-function _acf_get_posts_query( $sql ) {
+function _acf_query_remove_post_type( $sql ) {
 	
-	// get bits
+	// global
+	global $wpdb;
+	
+	
+	// bail ealry if no 'wp_posts.ID IN'
+	if( strpos($sql, "$wpdb->posts.ID IN") === false ) {
+		
+		return $sql;
+		
+	}
+	
+    
+    // get bits
 	$glue = 'AND';
 	$bits = explode($glue, $sql);
 	
-	
+    
 	// loop through $where and remove any post_type queries
 	foreach( $bits as $i => $bit ) {
 		
-		if( strpos($bit, 'post_type') !== false ) {
+		if( strpos($bit, "$wpdb->posts.post_type") !== false ) {
 			
 			unset( $bits[ $i ] );
 			
@@ -1348,15 +1416,11 @@ function _acf_get_posts_query( $sql ) {
 	
 	// join $where back together
 	$sql = implode($glue, $bits);
-	
-	
-	// remove this filter (only once)
-	remove_filter('query', '_acf_get_posts_query');
-	
-	
-	// return
-	return $sql;
-	
+    
+    
+    // return
+    return $sql;
+    
 }
 
 
@@ -1414,6 +1478,10 @@ function acf_get_grouped_posts( $args ) {
 	$posts = get_posts( $args );
 	
 	
+	// remove this filter (only once)
+	remove_filter('posts_orderby', '_acf_orderby_post_type');
+	
+	
 	// loop
 	foreach( $post_types as $post_type ) {
 		
@@ -1440,7 +1508,7 @@ function acf_get_grouped_posts( $args ) {
 			continue;
 			
 		}
-		
+	
 		
 		// sort into hierachial order!
 		// this will fail if a search has taken place because parents wont exist
@@ -1467,7 +1535,7 @@ function acf_get_grouped_posts( $args ) {
 			$all_posts = get_posts( $all_args );
 			
 			
-			// loop over posts and find $i
+			// loop over posts and update $offset
 			foreach( $all_posts as $offset => $p ) {
 				
 				if( $p->ID == $match_id ) {
@@ -1483,6 +1551,7 @@ function acf_get_grouped_posts( $args ) {
 			$all_posts = get_page_children( $parent, $all_posts );
 			
 			
+			// append
 			for( $i = $offset; $i < ($offset + $length); $i++ ) {
 				
 				$this_posts[] = acf_extract_var( $all_posts, $i);
@@ -1497,6 +1566,7 @@ function acf_get_grouped_posts( $args ) {
 			
 			// extract post
 			$post = acf_extract_var( $this_posts, $key );
+			
 			
 			
 			// add to group
@@ -1527,7 +1597,7 @@ function _acf_orderby_post_type( $ordeby, $wp_query ) {
 	// get post types
 	$post_types = $wp_query->get('post_type');
 	
-	
+
 	// prepend SQL
 	if( is_array($post_types) ) {
 		
@@ -1537,12 +1607,9 @@ function _acf_orderby_post_type( $ordeby, $wp_query ) {
 	}
 	
 	
-	// remove this filter (only once)
-	remove_filter('posts_orderby', '_acf_orderby_post_type');
-	
-	
 	// return
 	return $ordeby;
+	
 }
 
 
@@ -3225,7 +3292,13 @@ function acf_validate_attachment( $attachment, $field, $context = 'prepare' ) {
 	if( $file['type'] ) {
 		
 		$mime_types = acf_maybe_get($field, 'mime_types', '');
+		
+		// lower case
+		$file['type'] = strtolower($file['type']);
 		$mime_types = strtolower($mime_types);
+		
+		
+		// explode
 		$mime_types = str_replace(array(' ', '.'), '', $mime_types);
 		$mime_types = explode(',', $mime_types); // split pieces
 		$mime_types = array_filter($mime_types); // remove empty pieces
