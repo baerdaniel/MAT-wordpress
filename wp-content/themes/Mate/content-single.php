@@ -23,7 +23,7 @@
 	<?php
 		$src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), '' );
 	?>
-	<div class='poster trunk' style="background: url(<?php echo $src[0]; ?> )">
+	<div class='poster' style="background: url(<?php echo $src[0]; ?> )">
 		<header class="entry-header">
 
 		<?php the_field ('start_date') ?>
@@ -58,15 +58,16 @@
 
 		<?php
 			$categories = get_the_category($post->ID);
+
 			foreach($categories as $category) :
+
 				$children = get_categories( array ('parent' => $category->term_id ));
 				$has_children = count($children);
+
 				if ( $has_children == 0 ) {
 				echo '<div class="related-cat L-1-3 M-1-1 gutters">';
-			 	echo '<h3>';
-			 	echo $category->name;
-			 	echo '</h3>';
-			 	echo $category->description;	
+			 	echo '<a class="button link" href="' . esc_url( get_category_link( $categories[0]->term_id ) ) . '">' . esc_html( $categories[0]->name ) . '</a>';
+			 	echo '<p class="">' . $category->description . '</p>';
 			 	echo '</div>';			 	
 				}
 			endforeach;
@@ -130,9 +131,36 @@
 
 			    endwhile;
 
-		?>		
+		?>	
 
 	</div><!-- .entry-content -->
 
 
 </article><!-- #post-## -->
+
+	<div class='related-content'>
+	<?php 
+
+		$posts = get_field('related_content');
+
+		if( $posts ): ?>
+
+			<section class="L-1-1 gutters">
+				<ul class="main-gallery">'
+				    <?php foreach( $posts as $post): // variable must be called $post (IMPORTANT) ?>
+				        <?php setup_postdata($post); ?>
+				        <li class="gallery-cell">
+				            <a href="<?php the_permalink(); ?>">
+				           		<?php the_post_thumbnail('thumbnail'); ?>
+				            	<h4><?php the_title(); ?></h4>
+				            	<div class='excerpt'>
+				            		<?php the_excerpt(); ?>
+				            	</div>
+				            </a>
+				        </li>
+				    <?php endforeach; ?>
+		    </ul>
+		    <section>
+		    <?php wp_reset_postdata(); // IMPORTANT - reset the $post object so the rest of the page works correctly ?>
+		<?php endif; ?>
+	</div><!-- .related-content -->

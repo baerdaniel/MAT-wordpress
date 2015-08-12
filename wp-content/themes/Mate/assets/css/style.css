@@ -62,7 +62,7 @@ a:hover {
 }
 
 .button {
-    border: 1px solid #ddd;
+    border: 1px solid rgba(0, 0, 0, 0.05);
     padding: 0.25em 0.5em;
     -webkit-transition: background-color 300ms;
     -moz-transition: background-color 300ms;
@@ -71,7 +71,7 @@ a:hover {
 }
 
 .button:hover {
-    background-color: #ddd;
+    background-color: rgba(0, 0, 0, 0.05);
     color: black;
 
 }
@@ -84,6 +84,7 @@ body {
     font-weight: 400;
     font-style: normal;
     font-size: 16px;
+    line-height: 1.35em;
 }
 
 h1, h2, h3, h4 {
@@ -292,6 +293,7 @@ p {
 
 .entry-header h1 {
     font-size: 2em;
+    line-height: 1.25em;
     border: 2px solid #fff;
     padding: 0 1em 0 0.5em;
     background-color: rgba(0, 0, 0, 0.1);
@@ -306,6 +308,16 @@ p {
 
 .main-gallery{
     /*height: 100px;*/
+}
+
+
+/* Gallery  ------------------*/
+
+.related-content li {
+    width: 100px;
+}
+
+.related-content .wp-post-image {
 }
 
 
@@ -326,6 +338,7 @@ p {
 
 .single .entry-content p:nth-child(1){
     font-size: 1.5em;
+    line-height: 1.15em;
 }
 
 
@@ -370,6 +383,7 @@ p {
 
 .feature-box.large p{
     font-size: 1.5em;
+    line-height: 1.15em;
 }
 
 /* Media ------------------*/
@@ -409,6 +423,28 @@ p {
 .gallery-cell img {
   height: 100%;
   width: auto;
+}
+
+
+
+.related-content .main-gallery {
+    padding-bottom: 0%;
+    height: 400px;
+}
+
+.related-content .main-gallery .flickity-viewport {
+  position: absolute;
+  width: 100%;
+}
+
+.related-content .gallery-cell {
+    width: 250px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.related-content .gallery-cell img {
+
 }
 
 
