@@ -53,7 +53,7 @@
 						$children = get_categories( array ('parent' => $category->term_id ));
 						$has_children = count($children);
 						if ( $has_children == 0 ) {
-					 	echo $category->link;
+					 	echo $category->name;
 						}
 					endforeach;
 				?>
