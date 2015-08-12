@@ -45,16 +45,17 @@ get_header(); ?>
 	</div><!-- .content-area -->
 
 
-	<!-- language footers -->
-	<?php
-		$currentlang = get_bloginfo('language');
-		if($currentlang=="en-US"):
-			get_footer();
-	?>
-	<?php else: 
-		include 'footer-spanish.php';
-	?>
-	<?php endif; ?>
+	<?php get_footer(); ?>
+	<!-- language footers
+	//<?php
+	//	$currentlang = get_bloginfo('language');
+	//	if($currentlang=="en-US"):
+	//		get_footer();
+	//?>
+	//<?php else: 
+	//	include 'footer-spanish.php';
+	//?>
+	//<?php endif; ?> -->
 
 
 
