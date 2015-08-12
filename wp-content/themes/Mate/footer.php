@@ -10,6 +10,51 @@
  */
 ?>
 
+
+
+
+
+	<div class='related-content'>
+	<?php 
+
+		$posts = get_field('related_content');
+
+		if( $posts ): ?>
+
+			<section class="L-1-1">
+				<?php
+				$currentlang = get_bloginfo('language');
+				if($currentlang=="en-US"):
+					echo '<h2 class="trunk">Related Content</h2>';
+				?>
+				<?php else: 
+					echo '<h2 class="trunk">Contenido Relacionado</h2>';
+				?>
+				<?php endif; ?>
+				<ul class="main-gallery">
+				    <?php foreach( $posts as $post): // variable must be called $post (IMPORTANT) ?>
+				        <?php setup_postdata($post); ?>
+				        <li class="gallery-cell gutters">
+				            <a href="<?php the_permalink(); ?>">
+				           		<?php the_post_thumbnail('thumbnail'); ?>
+				           	</a>
+				           	<p>Posted on <?php the_date(); ?></p>
+				            <h3>
+				            	<?php the_title(); ?>
+				            </h3>
+				            <div class='excerpt'>
+				            		<?php the_excerpt(); ?>
+				            </div>
+				        	<span class='gradient'></span>
+
+				        </li>
+				    <?php endforeach; ?>
+		    	</ul>
+		    <section>
+		    <?php wp_reset_postdata(); // IMPORTANT - reset the $post object so the rest of the page works correctly ?>
+		<?php endif; ?>
+	</div><!-- .related-content -->
+
 	</div><!-- .site-content -->
 
 	<footer class="site-footer L-1-1" role="contentinfo">

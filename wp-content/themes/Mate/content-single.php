@@ -138,29 +138,4 @@
 
 </article><!-- #post-## -->
 
-	<div class='related-content'>
-	<?php 
 
-		$posts = get_field('related_content');
-
-		if( $posts ): ?>
-
-			<section class="L-1-1 gutters">
-				<ul class="main-gallery">'
-				    <?php foreach( $posts as $post): // variable must be called $post (IMPORTANT) ?>
-				        <?php setup_postdata($post); ?>
-				        <li class="gallery-cell">
-				            <a href="<?php the_permalink(); ?>">
-				           		<?php the_post_thumbnail('thumbnail'); ?>
-				            	<h4><?php the_title(); ?></h4>
-				            	<div class='excerpt'>
-				            		<?php the_excerpt(); ?>
-				            	</div>
-				            </a>
-				        </li>
-				    <?php endforeach; ?>
-		    </ul>
-		    <section>
-		    <?php wp_reset_postdata(); // IMPORTANT - reset the $post object so the rest of the page works correctly ?>
-		<?php endif; ?>
-	</div><!-- .related-content -->
