@@ -20,9 +20,21 @@
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
-		<?php the_content(); ?>
 
-		<?php the_field('address') ?>
+		
+		<?php 
+			$map = get_field('map');
+			$address = get_field('address');
+
+			if ( $map ):
+				echo '<div class="map">' . do_shortcode( $map ) . '</div>';
+			endif;
+
+			if ( $address ):
+				echo '<div class="address">' . $address . '</div>';
+			endif;
+		?>
+
 		<?php
 
 		    // Visit page opening
@@ -67,10 +79,10 @@
 
 					// small boxes
 			        if( get_row_layout() == 'small_box' ):
-			        	echo '<div class="feature-box small gutters L-1-3">';
+			        	echo '<div class="feature-box small gutters L-1-3 M-1-2">';
 
 			        		if( $video ):
-			        			echo '<div>'.$video.'</div>';
+			        			echo '<div class="video">'.$video.'</div>';
 			        		endif;
 			        		if( $singleImage ):
 				        		echo '<img src="' . $singleImage['url'] . '" alt="' . $singleImage['alt'] . '" />';
@@ -92,7 +104,7 @@
 				        		echo '<div>'.$content.'</div>';
 				        	endif;
 							if( $link ):
-				        		echo '<a href='.$link.' class="button">' .$label.'</a>';
+				        		echo '<a href='.$link.' class="button link">' .$label.'<span class="icon"></span></a>';
 				        	endif;
 
 						echo '</div>'; 
@@ -103,7 +115,7 @@
 			        	echo '<div class="feature-box medium gutters L-1-2">';
 
 							if( $video ):
-			        			echo '<div>'.$video.'</div>';
+			        			echo '<div class="video">'.$video.'</div>';
 			        		endif;
 			        		if( $singleImage ):
 				        		echo '<img src="' . $singleImage['url'] . '" alt="' . $singleImage['alt'] . '" />';
@@ -125,7 +137,7 @@
 				        		echo '<div>'.$content.'</div>';
 				        	endif;
 							if( $link ):
-				        		echo '<a href='.$link.' class="button">' .$label.'</a>';
+				        		echo '<a href='.$link.' class="button link">' .$label.'<span class="icon"></span></a>';
 				        	endif;
 
 						echo '</div>';
@@ -133,10 +145,10 @@
 
 			        // large boxes
 			        if( get_row_layout() == 'large_box' ):
-			        	echo '<div class="feature-box large gutters L-2-3">';
+			        	echo '<div class="feature-box large gutters L-2-3 M-1-1">';
 				        	
 				        	if( $video ):
-			        			echo '<div>'.$video.'</div>';
+			        			echo '<div class="video">'.$video.'</div>';
 			        		endif;
 			        		if( $singleImage ):
 				        		echo '<img src="' . $singleImage['url'] . '" alt="' . $singleImage['alt'] . '" />';
@@ -158,7 +170,7 @@
 				        		echo '<div>'.$content.'</div>';
 				        	endif;
 							if( $link ):
-				        		echo '<a href='.$link.' class="button">' .$label.'</a>';
+				        		echo '<a href='.$link.' class="button link">' .$label.'<span class="icon"></span></a>';
 				        	endif;
 
 						echo '</div>';

@@ -62,19 +62,37 @@ a:hover {
 }
 
 .button {
+    display: inline-block;
+    line-height: 1.75em;
     border: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 0.25em 0.5em;
+    padding: 0.25em 0.25em 0.25em 0.75em;
     -webkit-transition: background-color 300ms;
     -moz-transition: background-color 300ms;
     -o-transition: background-color 300ms;
     transition: background-color 300ms;  
 }
 
-.button:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    color: black;
+    .button:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        color: black;
+    }
 
-}
+    .button .icon {
+        height: 25px;
+        width: 25px;
+        margin-left: 5px;
+        display: block;
+        float: right;
+        background-size: contain;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+    .button.link .icon{
+        background-image: url('../img/link.png');
+    }
+
+
 
 /* Typography ------------------*/
 
@@ -118,6 +136,20 @@ p {
     padding: 0 0.5em;
     line-height: 3em;
 }
+
+.home-link {
+    height: 3.75em;
+    width: 3.75em;
+    color: transparent;
+    background: url('../img/mate-logo.png') center center no-repeat;
+    background-size: 80%;
+}
+
+.home-link:hover {
+    color: transparent;
+}
+
+
 
 .main-nav {
     font-size: 1.25em;
@@ -364,8 +396,17 @@ p {
     width: 50%;
 }
 
+.post header.active-1:before{
+    content: 'On Now';
+    display: inline-block;
+    background: #fff;
+    color: #000;
+    padding: 0.25em 0.5em;
+}
+
 .date {
     margin-bottom: 0.25em;
+    display: inline-block;
 }
 
 .poster {
@@ -420,9 +461,9 @@ p {
 
 .entry-header h1 {
     font-size: 2em;
-    line-height: 1.25em;
+    line-height: 0.9em;
     border: 2px solid #fff;
-    padding: 0 1em 0 0.5em;
+    padding: 0.25em 1em 0.25em 0.5em;
     background-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -497,11 +538,11 @@ p {
 /* Feature Boxes ------------------*/
 
 .feature-boxes {
-    padding-top: 1.5em;
+    padding-top: 5em;
 }
 
 .feature-box h2 {
-    margin: 1em 0;
+    margin: 1.5em 0;
 }
 
 .feature-box p {

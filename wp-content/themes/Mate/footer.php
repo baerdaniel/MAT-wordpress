@@ -72,7 +72,7 @@
 					        if( get_row_layout() == 'address' ):
 					        	echo '<h4>'.$title.'</h4>';
 					        	echo '<p>'.$address.'</p>';
-					        	echo '<a class="button" href="/support">'.$label.'</a>';
+					        	echo '<a class="button link" href="/support">'.$label.'<span class="icon"></span></a>';
 					        endif;
 						endwhile;
 						?>
@@ -111,7 +111,7 @@
 				        if( get_row_layout() == 'support' ):
 				        	echo '<h4>'.$title.'</h4>';
 				        	echo '<p class="">'.$text.'</p>';
-				        	echo '<a class="button" href="'.$link.'">'.$label.'</a>';
+				        	echo '<a class="button link" href="'.$link.'">'.$label.'<span class="icon"></span></a>';
 				        endif;
 					endwhile;
 					?>

@@ -29,7 +29,7 @@
 
 	<a href="<?php the_permalink(); ?>">
 		<div class='header-wrapper trunk'>
-			<header class="entry-header">
+			<header class="entry-header active-<?php the_field ('active') ?>">
 				<div class='date'>
 					<?php the_field ('start_date') ?>
 					–

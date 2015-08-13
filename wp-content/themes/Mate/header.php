@@ -44,19 +44,10 @@
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed site">
 
-		<!-- <header class="site-header" role="banner">
-			<div class="site-branding">
-				<?php
-					if ( is_front_page() && is_home() ) : ?>
-						<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-					<?php else : ?>
-						<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-					<?php endif;
-				?>
-			</div>
-		</header>  .site-header -->
-
 		<div class="header-menu float-container L-1-1">
+			<a href='<?php echo home_url(); ?>' class='home-link'>
+				Home
+			</a>
 
 			<?php if ( has_nav_menu( 'primary' ) ) : ?>
 				<nav id="site-nav" class="main-nav L-1-2 float-container" role="navigation">
