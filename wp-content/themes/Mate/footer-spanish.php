@@ -21,7 +21,8 @@
 						while ( have_rows('address' ,167) ) : the_row();
 							$title = get_sub_field('address_title_es');
 							$label = get_sub_field('address_label_es');
-							$address = get_field('address' ,125);
+							$link = get_sub_field('address_page_es');
+							$address = get_sub_field('address' ,167);
 
 					        if( get_row_layout() == 'address' ):
 					        	echo '<h4>'.$title.'</h4>';

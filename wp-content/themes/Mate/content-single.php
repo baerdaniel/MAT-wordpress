@@ -66,7 +66,7 @@
 
 				if ( $has_children == 0 ) {
 				echo '<div class="related-cat L-1-3 M-1-1 gutters">';
-			 	echo '<a class="button link" href="' . esc_url( get_category_link( $categories[0]->term_id ) ) . '">' . esc_html( $categories[0]->name ) . '</a>';
+			 	echo '<a class="button link" href="' . esc_url( get_category_link( $categories[0]->term_id ) ) . '">' . esc_html( $categories[0]->name ) . '<span class="icon"></span></a>';
 			 	echo '<p class="">' . $category->description . '</p>';
 			 	echo '</div>';			 	
 				}

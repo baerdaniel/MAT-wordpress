@@ -97,13 +97,15 @@ a:hover {
 /* Typography ------------------*/
 
 
-body {
+body, pre {
     font-family: 'Calibre', sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 16px;
     line-height: 1.35em;
 }
+
+
 
 h1, h2, h3, h4 {
     font-family: 'Calibre', sans-serif;
@@ -121,6 +123,13 @@ h4{}
 p {
     margin: 1em 0;
 }
+
+
+tr {
+    border-bottom: 1px solid #ddd;
+    border: solid thin;
+}
+
 
 /* Navigation  ------------------*/
 
@@ -380,8 +389,12 @@ p {
 /* LISTING PAGES  ---------------------------------------
 --------------------------------------------------*/
 
+.page-header {
+    padding-top: 200px;
+}
 
 /* Items  ------------------*/
+
 
 .whats-on {
    text-align: left;
@@ -537,22 +550,46 @@ p {
 
 /* Feature Boxes ------------------*/
 
+.section-title {
+    border-top: 1px solid #a3a3a3;
+}
+
+.section-title h1 {
+    font-size: 3em;
+    line-height: 1em;
+}
+
 .feature-boxes {
-    padding-top: 5em;
+    /*margin-top: 5em;*/
 }
 
 .feature-box h2 {
     margin: 1.5em 0;
 }
 
+
 .feature-box p {
     margin-bottom: 2em;
 }
 
-.feature-box.large p{
+.feature-box.large {
+    width: 66.666%;
+}
+
+.feature-box.medium {
+    width: 50%;
+}
+
+.feature-box.small {
+    width: 33.333%;
+}
+
+/*.feature-box.large p,*/
+.feature-box pre{
     font-size: 1.5em;
     line-height: 1.15em;
 }
+
 
 
 

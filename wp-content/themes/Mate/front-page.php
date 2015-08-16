@@ -43,7 +43,7 @@ get_header(); ?>
 
 			<?php
 			// Start the loop.
-			query_posts('page_id=211z');
+			query_posts('page_id=211');
 			while ( have_posts() ) : the_post();
 
 				// Include the page content template.
@@ -57,16 +57,8 @@ get_header(); ?>
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
 
-	<!-- language footers -->
-	<?php
-		$currentlang = get_bloginfo('language');
-		if($currentlang=="en-US"):
-			get_footer();
-	?>
-	<?php else: 
-		include 'footer-spanish.php';
-	?>
-	<?php endif; ?>
+
+	<?php get_footer(); ?>
 
 
 

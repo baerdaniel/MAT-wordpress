@@ -64,10 +64,13 @@
 
 		if( have_rows('feature_boxes') ):
 
-			echo '<section class="feature-boxes trunk inline-block-container">';
 
 		    // Feature boxes all pages
 		    while ( have_rows('feature_boxes') ) : the_row();
+
+		    
+		    	$section = get_sub_field('section_title');
+
 
 				$title = get_sub_field('title');
 				$content = get_sub_field('content');
@@ -76,6 +79,14 @@
 				$singleImage = get_sub_field('image');
 				$link = get_sub_field('link');
 				$label = get_sub_field('link_label');
+
+					if( get_row_layout() == 'section_title' ):
+						if ( $section ):
+							echo '<h1 class="section-title L-1-1">'.$section.'</h1>';
+						endif;
+					endif;
+
+			echo '<section class="feature-boxes trunk inline-block-container">';
 
 					// small boxes
 			        if( get_row_layout() == 'small_box' ):

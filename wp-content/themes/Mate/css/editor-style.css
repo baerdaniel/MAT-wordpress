@@ -25,7 +25,7 @@ Description: Used to style the TinyMCE editor.
 
 body {
 	color: #333;
-	font-family: "Noto Serif", serif;
+	font-family: Arial, sans-serif;
 	font-weight: 400;
 	font-size: 17px;
 	line-height: 1.6471;
@@ -153,23 +153,16 @@ code,
 kbd,
 tt,
 var,
-samp,
-pre {
+samp {
 	font-family: Inconsolata, monospace;
 }
 
 pre {
-	background-color: #fcfcfc;
-	border: 1px solid #eaeaea;
+	font-family: arial;
 	font-size: 17px;
 	line-height: 1.2353;
-	margin-bottom: 28px;
 	max-width: 100%;
 	overflow: auto;
-	padding: 14px;
-	white-space: pre;
-	white-space: pre-wrap;
-	word-wrap: break-word;
 }
 
 abbr[title] {
