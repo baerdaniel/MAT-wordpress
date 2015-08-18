@@ -49,9 +49,8 @@ get_header(); ?>
 			<div class='whats-on float-container'>
 
 
-				
-
 					<?php
+					
 					// Start the Loop.
 					while ( have_posts() ) : the_post();
 

@@ -391,10 +391,20 @@ tr {
 /* LISTING PAGES  ---------------------------------------
 --------------------------------------------------*/
 
-.page-header {
+/*.page-header {
     padding-top: 200px;
+}*/
+
+.page-header h1 {
+    font-size: 5em;
+    line-height: 1em;
 }
 
+.taxonomy-description {
+    padding: 2em 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
 
 
 /* Filters  -------------------*/
@@ -473,16 +483,19 @@ tr {
 /* Items  ------------------*/
 
 
-.whats-on {
+.whats-on,
+.coming-up {
    text-align: left;
 }
 
-.whats-on article {
+.whats-on article,
+.coming-up article {
     margin-bottom: 1px;
     position: relative;
 }
 
-.whats-on .category-events {
+.whats-on .category-events,
+.coming-up .category-events {
     width: 50%;
 }
 
@@ -510,7 +523,8 @@ tr {
     background-attachment: fixed !important;
 }
 
-.poster-color {
+.whats-on .poster-color,
+.coming-up .poster-color  {
     position: absolute; 
     top: 0;
     bottom: 0;
@@ -561,6 +575,27 @@ tr {
     font-size: 1.25em;
 }
 
+.past article * {
+    position: relative;
+    color: #000;
+}
+
+.past h2 {
+    margin: 0.75em 0;
+}
+
+.past .category {
+    display: inline-block;
+    font-size: 0.9em;
+    border: 1px solid #ddd;
+    padding: 0.1em 0.5em 0.1em 0.5em;
+}
+
+.past .date {
+    font-size: 0.9em;
+    display: block;
+    margin: 0.5em 0;
+}
 
 /* Single Pages  ------------------*/
 
@@ -632,13 +667,15 @@ tr {
 
 /* Feature Boxes ------------------*/
 
-.section-title {
+.page .section-title {
     border-top: 1px solid #a3a3a3;
 }
 
 .section-title h1 {
     font-size: 3em;
     line-height: 1em;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
 }
 
 .feature-boxes {
