@@ -61,6 +61,7 @@ a:hover {
     color: #a3a3a3;
 }
 
+
 .button {
     display: inline-block;
     line-height: 1.75em;
@@ -71,6 +72,7 @@ a:hover {
     -o-transition: background-color 300ms;
     transition: background-color 300ms;  
 }
+
 
     .button:hover {
         background-color: rgba(0, 0, 0, 0.05);
@@ -393,6 +395,81 @@ tr {
     padding-top: 200px;
 }
 
+
+
+/* Filters  -------------------*/
+
+.filters, .filters .children {
+    position: relative;
+}
+
+.filters li, .filters ul {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.children .children {
+    display: block;
+/*    position: absolute;
+    bottom: 0;
+    left: 0;*/
+}
+
+.filters button,
+.filters a {
+    display: inline-block;
+    vertical-align: top;
+    line-height: 1.75em;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1.25em 1.5em 1.25em 1.75em;
+    margin: 5px 3px;
+    cursor: pointer;
+/*    position: relative;
+    bottom: 1px;*/
+    -webkit-transition: background-color 300ms;
+    -moz-transition: background-color 300ms;
+    -o-transition: background-color 300ms;
+    transition: background-color 300ms;  
+}
+
+    .filters button.active,
+    .filters a.active {
+        border-color: #000;
+    }
+
+/*.filter-list {
+    position: relative;
+    bottom: 1px;
+}
+*/
+
+    .filters li a:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        color: black;
+    }
+
+    .filters li a .icon {
+        height: 25px;
+        width: 25px;
+        margin-left: 5px;
+        display: block;
+        float: right;
+        background-size: contain;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+    .button.link .icon{
+        background-image: url('../img/link.png');
+    }
+
+    .button.dropdown .icon{
+        background-image: url('../img/dropdown.png');
+    }
+
+
+
+
 /* Items  ------------------*/
 
 
@@ -487,6 +564,11 @@ tr {
 
 /* Single Pages  ------------------*/
 
+
+.single article {
+    padding-bottom: 3em;
+}
+
 .main-gallery{
     /*height: 100px;*/
 }
@@ -513,7 +595,7 @@ tr {
 
 /* X ------------------*/
 
-.single section {
+.single section, .page-top {
     margin: 7em 0;
 }
 

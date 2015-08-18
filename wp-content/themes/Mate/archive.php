@@ -21,18 +21,28 @@ get_header(); ?>
 	<section id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
-				<?php if ( have_posts() ) : ?>
+			<?php if ( have_posts() ) : ?>
 
-					<header class="page-header trunk">
-						<?php
-							the_archive_title( '<h1 class="page-title">', '</h1>' );
-							the_archive_description( '<div class="taxonomy-description">', '</div>' );
-						?>
-						<?php echo do_shortcode( '[searchandfilter fields="category,post_tag" types="checkbox,checkbox" hierarchical="1"]' ); ?>
+			<header class="page-header trunk">
+				<?php
+					the_archive_title( '<h1 class="page-title">', '</h1>' );
+					the_archive_description( '<div class="taxonomy-description">', '</div>' );
+				?>
 
+			</header><!-- .page-header -->
 
+				<div class='filters trunk gutters'>
+					<a class='button' href='/category/whats-on/'>Show All</a>
+					<button id='exhibitions' class='button dropdown filter-toggle'>Exhibitions<span class='icon'></span></button>
+					<button id='events' class='button dropdown filter-toggle'>Events<span class='icon'></span></button>
+					<div id='filters-exhibitions' class='filter-list'>
+						<?php wp_list_categories('exclude=31&title_li=&child_of=7'); ?>
+					</div>
+					<div id='filters-events' class='filter-list'>
+						<?php wp_list_categories('exclude=31&title_li=&child_of=1'); ?>	
+					</div>					
+				</div>
 
-					</header><!-- .page-header -->
 
 			<div class='whats-on float-container'>
 
