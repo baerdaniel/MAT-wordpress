@@ -11,7 +11,7 @@
 ?>
 
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'post L-1-4 gutters' ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'post L-1-4 M-1-3 S-1-1 gutters' ); ?>>
 <!-- <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>> -->
 
 	<!-- get post thumbnail url -->

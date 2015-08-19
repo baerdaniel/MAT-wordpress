@@ -156,7 +156,7 @@ get_header(); ?>
 
 					echo '<section class="past trunk">';
 						echo '<div class="section-title"><h1 class="gutters">Archive</h1></div>';
-						echo '<div class="listing float-container">';
+						echo '<div class="listing inline-block-container">';
 						// Start the Loop.
 						while ( $past_query->have_posts() ) : $past_query->the_post();
 							get_template_part( 'content', 'past' );

@@ -118,7 +118,7 @@
 
 
 
-		<?php
+	<!-- 	<?php
 			wp_link_pages( array(
 				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentyfifteen' ) . '</span>',
 				'after'       => '</div>',
@@ -127,7 +127,7 @@
 				'pagelink'    => '<span class="screen-reader-text">' . __( 'Page', 'twentyfifteen' ) . ' </span>%',
 				'separator'   => '<span class="screen-reader-text">, </span>',
 			) );
-		?>
+		?> -->
 
 	</div><!-- .entry-content -->
 

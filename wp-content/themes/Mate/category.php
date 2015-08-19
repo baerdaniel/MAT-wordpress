@@ -46,8 +46,6 @@ get_header(); ?>
 				</div>
 			</section>
 
-			<div class=''>
-
 
 
 				<?php
