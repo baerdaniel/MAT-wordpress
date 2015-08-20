@@ -20,23 +20,42 @@ get_header(); ?>
 	
 		<main id="main" class="site-main" role="main">
 			<div class='whats-on float-container'>
-				<?php if ( have_posts() ) : ?>
+				<?php
 
-					<?php
-					// Start the loop.
-					query_posts('cat=7,1');
-					while (have_posts()) : the_post();
 
-						get_template_part( 'content', get_post_format() );
+					// GET posts in ‘what’s on’ ---------------------------------------
 
-					// End the loop.
-					endwhile;
+					// WP_Query arguments
+					$args = array (
+						'cat'                    => '64',
+						'meta_query'             => array(
+							array(
+								'key'       => 'featured',
+								'value'     => '1',
+							),
+						),
+					);
 
-				// If no content, include the "No posts found" template.
-				else :
-					get_template_part( 'content', 'none' );
-				endif;
-				wp_reset_query();
+
+					$whatson_query = new WP_Query( $args );
+
+
+					echo '<section class="whats-on L-1-1">';
+						echo '<div class="section-title"><h1 class="trunk gutters">On Now</h1></div>';
+						echo '<div class="listing float-container">';
+						// Start the Loop.
+						while ( $whatson_query->have_posts() ) : $whatson_query->the_post();
+
+							get_template_part( 'content', get_post_format() );
+
+						// End the loop.
+						endwhile;
+						echo '</div>';
+					echo '</section>';
+
+					// Restore original Post Data //
+					wp_reset_postdata();
+
 				?>
 			</div> <!-- .whats-on -->
 
