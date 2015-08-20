@@ -99,8 +99,8 @@ get_header(); ?>
 						echo '</div>';
 					echo '</section>';
 
-						// Restore original Post Data //
-						wp_reset_postdata();
+					// Restore original Post Data //
+					wp_reset_postdata();
 
 
 
