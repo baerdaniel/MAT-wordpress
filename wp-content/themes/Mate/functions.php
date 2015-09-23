@@ -53,6 +53,12 @@ if ( ! function_exists( 'twentyfifteen_setup' ) ) :
  */
 
 
+function custom_excerpt_length( $length ) {
+	return 20;
+}
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+
+
 add_filter( 'get_the_archive_title', function ($title) {
 
     if ( is_category() ) {
@@ -72,6 +78,22 @@ add_filter( 'get_the_archive_title', function ($title) {
     return $title;
 
 });
+
+//Featured Image Thumbnail
+//Usage - the_post_thumbnail_caption();
+
+function the_post_thumbnail_caption() {
+  global $post;
+
+  $thumbnail_id    = get_post_thumbnail_id($post->ID);
+  $thumbnail_image = get_posts(array('p' => $thumbnail_id, 'post_type' => 'attachment'));
+
+  if ($thumbnail_image && isset($thumbnail_image[0])) {
+    echo '<span>'.$thumbnail_image[0]->post_excerpt.'</span>';
+  }
+}
+
+
 
 
 // // Register Custom Taxonomies

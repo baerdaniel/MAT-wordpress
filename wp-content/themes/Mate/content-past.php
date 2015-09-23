@@ -33,14 +33,16 @@
 				<div class='date'>
 				</div>
 				<h2><?php the_title() ?></h2>
-				<div class='category'>
+				<div class='categories'>
 					<?php
 						$categories = get_the_category($post->ID);
 						foreach($categories as $category) :
 							$children = get_categories( array ('parent' => $category->term_id ));
 							$has_children = count($children);
 							if ( $has_children == 0 ) {
-						 	echo $category->name;
+						 	echo '<div class="category">';
+						 		echo $category->name;
+						 	echo '</div>';
 							}
 						endforeach;
 					?>

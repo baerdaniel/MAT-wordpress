@@ -1,6 +1,10 @@
 <?php
 /**
- * The template for displaying What’s On
+ * The template for displaying archive pages
+ *
+ * If you'd like to further customize these archive views, you may create a
+ * new template file for each one. For example, tag.php (Tag archives),
+ * category.php (Category archives), author.php (Author archives), etc.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
@@ -17,38 +21,33 @@ get_header(); ?>
 			<?php if ( have_posts() ) : ?>
 
 			<section class='page-top'>
-				<header class="page-header">
+				<header class="page-header trunk">
 					<?php
-						the_archive_title( '<h1 class="page-title trunk gutters">',  '</h1>' );
-						the_archive_description( '<div class="taxonomy-description"><div class="trunk gutters"><div class="L-1-2 M-1-1">', '</div></div></div>' );
+						the_archive_title( '<h1 class="page-title">', '</h1>' );
+						the_archive_description( '<div class="taxonomy-description">', '</div>' );
 					?>
 				</header><!-- .page-header -->
 
 				<div class='filters trunk gutters'>
-<!-- 					<div class='float-container'>
+					<div class='float-container'>
 						<a class='button' href='/category/whats-on/'>Show All</a>
 						<button id='exhibitions' class='button dropdown filter-toggle'>Exhibitions<span class='icon'></span></button>
 						<button id='events' class='button dropdown filter-toggle'>Events<span class='icon'></span></button>
-					</div> -->
+					</div>
 					<div id='filters-exhibitions' class='filter-list float-container'>
-						<a href='/dev/mate/wordpress/en/category/whats-on/exhibitions/' id='exhibitions' class='button dropdown'>Exhibitions<!-- <span class='icon'></span> --></a>
-						<?php wp_list_categories('exclude=31&title_li=&child_of=8'); ?>
+						<?php wp_list_categories('exclude=31&title_li=&child_of=7'); ?>
 					</div>
 					<div id='filters-events' class='filter-list float-container'>
-						<a href='/dev/mate/wordpress/en/category/whats-on/events/' id='events' class='button dropdown'>Events<!-- <span class='icon'></span> --></a>
-						<?php wp_list_categories('exclude=31&title_li=&child_of=7'); ?>	
+						<?php wp_list_categories('exclude=31&title_li=&child_of=1'); ?>	
 					</div>					
 				</div>
 			</section>
 
 
-
 				<?php
 
 					$currentdate = date("Y-m-d",mktime(0,0,0,date("m"),date("d"),date("Y")));
-					$cat = get_query_var('cat');
-					$yourcat = get_category ($cat);
-					$thiscat = $yourcat->slug;
+
 
 
 					// GET posts started in the past, ending in the future ---------------------------------------
@@ -57,27 +56,25 @@ get_header(); ?>
 					   
 					    'meta_query'=> array(
 					    	'relation' => 'AND',
-						        array(
-						          'key' => 'start_date',
-						          'compare' => '<',
-						          'value' => $currentdate,
-						          'type' => 'DATE',
-						        ),
-						        array(
-						          'key' => 'end_date',
-						          'compare' => '>',
-						          'value' => $currentdate,
-						          'type' => 'DATE',
-						        )
+					        array(
+					          'key' => 'start_date',
+					          'compare' => '<',
+					          'value' => $currentdate,
+					          'type' => 'DATE',
+					        ),
+					        array(
+					          'key' => 'end_date',
+					          'compare' => '>',
+					          'value' => $currentdate,
+					          'type' => 'DATE',
+					        )
 
 					        ),
-					    'category_name' => $thiscat,
 					    'meta_key' => 'start_date',
 					    'orderby' => 'meta_value',
 					    'order' => 'ASC',
 					    )
 					);
-
 					if ( $now_query->have_posts() ) :
 						echo '<section class="whats-on L-1-1">';
 							echo '<div class="section-title"><h1 class="trunk gutters">On Now</h1></div>';
@@ -105,7 +102,7 @@ get_header(); ?>
 
 
 
-					// GET posts that have ended in the past ---------------------------------------
+					// GET posts that will start in the future ---------------------------------------
 
 					$future_query = new WP_Query(  array (
 					   
@@ -116,13 +113,11 @@ get_header(); ?>
 					          'value' => $currentdate,
 					          'type' => 'DATE',
 					        )),
-					    'category_name' => $thiscat,
 					    'meta_key' => 'start_date',
 					    'orderby' => 'meta_value',
 					    'order' => 'ASC',
 					    )
 					);
-
 					if ( $future_query->have_posts() ) :
 						echo '<section class="coming-up L-1-1">';
 							echo '<div class="section-title"><h1 class="trunk gutters">Coming Up</h1></div>';
@@ -140,7 +135,6 @@ get_header(); ?>
 					endif;
 
 
-
 					// GET posts that have ended in the past ---------------------------------------
 
 					$past_query = new WP_Query(  array (
@@ -152,16 +146,14 @@ get_header(); ?>
 					          'value' => $currentdate,
 					          'type' => 'DATE',
 					        )),
-					    'category_name' => $thiscat,
 					    'meta_key' => 'start_date',
 					    'orderby' => 'meta_value',
 					    'order' => 'ASC',
 					    )
 					);
-
 					if ( $past_query->have_posts() ) :
 						echo '<section class="past trunk">';
-							echo '<div class="section-title"><h1 class="gutters">Archive</h1></div>';
+							echo '<div class="section-title"><h1 class="gutters">Archiver</h1></div>';
 							echo '<div class="listing inline-block-container">';
 							// Start the Loop.
 							while ( $past_query->have_posts() ) : $past_query->the_post();
@@ -176,17 +168,8 @@ get_header(); ?>
 					endif;
 
 
-
-
-
-
-
-
-
 				// If no content, include the "No posts found" template.
 				else :
-
-					// get_template_part( 'content', 'none' );
 				endif;
 
 

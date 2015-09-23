@@ -12,9 +12,10 @@
 
 <?php 
 	$colour = get_field('colour');
+	$text = get_field('text_colour');
 ?>
 
-<article id="post-<?php the_ID(); ?>" class='post' style='background-color: <?php echo $colour; ?>'>
+<article id="post-<?php the_ID(); ?>" class='post white-<?php echo $text; ?>' style='background-color: <?php echo $colour; ?>'>
 <!-- <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>> -->
 	
 
@@ -23,7 +24,7 @@
 	<?php
 		$src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), '' );
 	?>
-	<div class='poster' style="background: url(<?php echo $src[0]; ?> )">
+	<div class='poster top' style="background: url(<?php echo $src[0]; ?> )">
 		<div class='header-wrapper trunk gutters'>
 			<header class="entry-header">
 
@@ -53,31 +54,82 @@
 						endforeach;
 					?>
 				</div>
+
 			</header><!-- .entry-header -->
 		</div>
-
+		<figcaption class='caption feature-caption L-1-1'>
+			<?php the_post_thumbnail_caption(); ?>
+		</figcaption>
+		<!-- Reset query after query -->
+				<?php wp_reset_postdata(); ?>
 	</div>
 
 
 
 	<div class="entry-content trunk">
 
-		<?php
-			$categories = get_the_category($post->ID);
+		<aside class='sidebar L-1-3 M-1-1 gutters'>
+			<div class='float-container'>
+				<div class="related-cat gutters L-1-1 M-1-3 S-1-2">
 
-			foreach($categories as $category) :
+					<?php
+						$categories = get_the_category($post->ID);
+						foreach($categories as $category) :
+							$children = get_categories( array ('parent' => $category->term_id ));
+							$has_children = count($children);
+							if ( $has_children == 0 ) {
 
-				$children = get_categories( array ('parent' => $category->term_id ));
-				$has_children = count($children);
+						 	echo '<a class="button back" href="' . esc_url( get_category_link( $category->term_id ) ) . '">' . esc_html( $category->name ) . '<span class="icon"></span></a>';
+						 	echo '<p class="">' . $category->description . '</p>';
+							}
+						endforeach;
+					?>
 
-				if ( $has_children == 0 ) {
-				echo '<div class="related-cat L-1-3 M-1-1 gutters">';
-			 	echo '<a class="button link" href="' . esc_url( get_category_link( $categories[0]->term_id ) ) . '">' . esc_html( $categories[0]->name ) . '<span class="icon"></span></a>';
-			 	echo '<p class="">' . $category->description . '</p>';
-			 	echo '</div>';			 	
-				}
-			endforeach;
-		?>
+				</div>
+
+				<!-- Display links from Related Pages custom field -->
+				<?php 
+					$posts = get_field('related_pages');
+					if( $posts ): ?>
+					<ul class='related-pages gutters L-1-1 M-1-3 S-1-2'>
+						<?php foreach( $posts as $post): ?>
+					        <?php setup_postdata($post); ?>
+				           	<li>
+					           	<a class='button link' href="<?php the_permalink(); ?>">
+						           <?php the_title(); ?>
+						           <span class='icon'></span>
+						        </a>
+					       	</li>
+					    <?php endforeach; ?>
+					 </ul>
+				<?php endif; ?>
+				<!-- Reset query after loop -->
+				<?php wp_reset_postdata(); ?>
+
+				<!-- sponsor custom field -->
+
+				<?php
+					$sponsor = get_field('sponsor');
+				if( $sponsor ): ?>
+
+						<?php
+							$currentlang = get_bloginfo('language');
+							if($currentlang=="en-US"):
+								echo '<div class="sponsor gutters L-1-1 M-1-3 S-1-1">Supported by';
+							?>
+							<?php else: 
+								echo '<div class="sponsor gutters L-1-1 M-1-3 S-1-1">Apoyado de';
+							?>
+							<?php endif; ?>
+
+					<?php 
+						echo '<img src="' . $sponsor['sizes']['large'] . '">';
+						echo '</div>';
+					 ?>
+
+				<?php endif; ?>
+			</div>
+		</aside> <!-- .sidebar -->
 
 		<?php
 		if( have_rows('flexible_content') ):
@@ -87,13 +139,15 @@
 				$images = get_sub_field('gallery');
 				$video = get_sub_field('video');
 				$copy = get_sub_field('copy');
+				$quote = get_sub_field('quote');
 
 				if( $images ):
 
-				    echo '<section class="L-1-1 gutters"><ul class="main-gallery">';
+				    echo '<section class="gutters L-2-3 M-1-1"><ul class="main-gallery">';
 				        foreach( $images as $image ):
 				            echo '<li class="gallery-cell">';
 				        	echo '<img src="' . $image['url'] . '" alt="' . $image['alt'] . '" />';
+				        	echo '<span class="caption">' . $image['caption'] . '</span>';
 				            echo '</li>';
 				        endforeach;
 				    echo '</ul></section>';
@@ -124,7 +178,7 @@
 
 			        if( get_row_layout() == 'participant' ):
 
-			        	echo '<div class="participant float-container">';
+			        	echo '<div class="participant float-container L-2-3 M-1-1">';
 			        		echo '<div class="portrait L-1-4 gutters"><img src="' . $image['sizes']['large'] . '"></div>';
 			        		echo '<div class="L-3-4 gutters">';
 			        			echo '<h2 class="">' . $name . '</h2>';

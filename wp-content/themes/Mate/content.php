@@ -31,29 +31,36 @@
 		<div class='header-wrapper trunk gutters'>
 			<header class="entry-header active-<?php the_field ('active') ?>">
 				<div class='date'>
-					<?php the_field ('start_date') ?>
-					–
-					<?php the_field ('end_date') ?>
-					,
-					<?php the_field ('start_time') ?>
-					<?php the_field ('end_time') ?>
+					<?php 
+						$startDate = get_field ('start_date');
+						$endDate = get_field ('end_date');
+						$startTime = get_field ('start_time');
+						$endTime = get_field ('end_time');
+
+						if( $startDate ):
+							echo $startDate;
+						endif;
+						if( $endDate ):
+							echo ' – ' .$endDate;
+						endif;
+						if( $startTime ):
+							echo '<p class="time">' .$startTime ;
+							echo ' – ' .$endTime. '</p>';
+						endif;
+
+					?>
+					
 				</div>
 				<h1><?php the_title() ?></h1>
-				<!--<?php
-					if ( is_single() ) :
-						the_title( '<h1 class="entry-title">', '</h1>' );
-					else :
-						the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' );
-					endif;
-				?>-->
 
 				<?php
 					$categories = get_the_category($post->ID);
 					foreach($categories as $category) :
 						$children = get_categories( array ('parent' => $category->term_id ));
 						$has_children = count($children);
+						$cat_name = $category->name;
 						if ( $has_children == 0 ) {
-					 	echo $category->name;
+					 	echo '<div class="content-cat">' . $cat_name . '</div>';
 						}
 					endforeach;
 				?>

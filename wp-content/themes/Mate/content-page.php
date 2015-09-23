@@ -10,9 +10,10 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
-		twentyfifteen_post_thumbnail();
+		$src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), '' );
 	?>
-
+	<div class='poster top' style="background: url(<?php echo $src[0]; ?> )">
+	</div>
 	<header class="page-header">
 
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
@@ -24,8 +25,6 @@
 		
 		<?php 
 			$map = get_field('map');
-			$address = get_field('address');
-
 			if ( $map ):
 				echo '<div class="map">' . do_shortcode( $map ) . '</div>';
 			endif;
@@ -48,6 +47,7 @@
 
 				$title = get_sub_field('title');
 				$content = get_sub_field('content');
+				$quote = get_sub_field('quote');
 				$images = get_sub_field('gallery');
 				$video = get_sub_field('video');
 				$singleImage = get_sub_field('image');
@@ -55,6 +55,7 @@
 				$url = get_sub_field('external_link');
 				$label = get_sub_field('link_label');
 				$size = get_sub_field('size');
+
 
 					// small boxes
 			        if( get_row_layout() == 'section_title' ):
@@ -68,7 +69,7 @@
 			        endif;
 
 
-					// small boxes
+					// all boxes
 			        if( get_row_layout() == 'content_box' ):
 			        	echo '<div class="feature-box ' .$size. ' gutters">';
 
@@ -93,6 +94,9 @@
 					        endif;
 							if( $content ):
 				        		echo '<div>'.$content.'</div>';
+				        	endif;
+				        	if( $quote ):
+				        		echo '<div>'.$quote.'</div>';
 				        	endif;
 							if( $link ):
 				        		echo '<a href='.$link.' class="button link">' .$label.'<span class="icon"></span></a>';

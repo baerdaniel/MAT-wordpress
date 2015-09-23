@@ -1,0 +1,39 @@
+/*.page .section-title {
+	float: none;
+}
+
+.archive .section-title,
+.whats-on .section-title h1 {
+    font-size: 2rem;
+    line-height: 1.25em;
+    margin: 1rem auto;
+}
+
+.poster.top {
+	padding-bottom: 80vh;
+}
+
+.white-1 {
+	color: #fff;
+}
+
+.home .poster.top {
+	display: none;
+}
+
+.more-link {
+	display: none;
+}
+
+.related-content .main-gallery {
+	height: 350px;
+}
+
+.related-content .gallery-cell {
+	height: 350px;
+}
+
+.related-content .gallery-cell .gradient {
+	display: none;
+}
+*/
